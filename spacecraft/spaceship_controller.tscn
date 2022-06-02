@@ -17,5 +17,5 @@ modulate = Color( 0.823529, 0.329412, 0.329412, 1 )
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.4, 0.4 )
 smoothing_enabled = true

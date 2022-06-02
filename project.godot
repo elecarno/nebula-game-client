@@ -10,13 +10,22 @@ config_version=4
 
 [application]
 
-config/name="topdown_spaceship_integration"
-run/main_scene="res://world.tscn"
+config/name="network_testing_client"
+run/main_scene="res://lobby/lobby.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+server="*res://server/server.gd"
 
 [display]
 
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1280
+window/size/test_height=720
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 
