@@ -6,11 +6,9 @@ var cam
 const move_speed = 100
 var gravity = true
 var intr_cast
-var hover_cast
 
 func _ready():
 	intr_cast = get_node("player_body/frontarm/intr_cast")
-	hover_cast = get_node("player_body/head/hover_cast")
 	cam = get_node("Camera2D")
 
 func _physics_process(delta):

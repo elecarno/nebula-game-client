@@ -11,12 +11,12 @@ config_version=4
 [application]
 
 config/name="network_testing_client"
-run/main_scene="res://lobby/lobby.tscn"
+run/main_scene="res://scene_handler.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-server="*res://server/server.gd"
+server="*res://singletons/server.gd"
 
 [display]
 

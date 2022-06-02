@@ -1,0 +1,52 @@
+extends Node
+
+# development ip & port
+const DEFAULT_IP = "127.0.0.1"
+const DEFAULT_PORT = 5000
+
+var network = NetworkedMultiplayerENet.new()
+var selected_IP
+var selected_port
+
+var local_player_id = 0
+sync var players = {}
+sync var player_data = {}
+
+func _ready():
+	get_tree().connect("network_peer_connected", self, "_player_connected")
+	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	get_tree().connect("connection_failed", self, "_connected_fail")
+	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	_connect_to_server()
+
+func _connect_to_server():
+	get_tree().connect("connected_to_server", self, "_connected_ok")
+	network.create_client(DEFAULT_IP, DEFAULT_PORT)
+	get_tree().set_network_peer(network)
+	
+func _player_connected(id):
+	print("player " + str(id) + " connected")
+	
+func _player_disconnected(id):
+	print("player " + str(id) + " disconnected")
+	
+func _connected_ok():
+	print("successfully connected to server")
+	
+func _connected_fail():
+	print("failed to connect to server")
+	
+func _server_disconnected():
+	print("server disconnected")
+	
+# `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
+func fetch_shipdata(ship_name, requester):
+	rpc_id(1, "fetch_shipdata", ship_name, requester)
+	print("fetching data for: " + ship_name)
+
+# this function is a called from the server, hence the `remote` tag
+# `s_` identifies variables from server, `instance_from_id` references
+# the id of the initial caller from `fetch_shipdata`
+remote func return_shipdata(s_shipdata, requester):
+	print("recieved data: " + str(s_shipdata))
+	instance_from_id(requester).setdata(s_shipdata)

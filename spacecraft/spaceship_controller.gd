@@ -3,13 +3,32 @@ extends KinematicBody2D
 export var enabled = false
 var cam
 
-export var max_forward = 200
-export var max_reverse = 50
-export var max_side = 100
-export var stop_distance = 4
+var max_forward
+var max_reverse
+var max_side
+var stop_distance
 
 func _ready():
+	# wait one second to allow client to connect
+	var t = Timer.new()
+	t.set_wait_time(1)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	# call data fetch from server singleton
+	server.fetch_shipdata("testship", get_instance_id())
+	# free timer to avoid memory leak
+	t.queue_free()
+	
 	cam = get_node("Camera2D")
+	
+func setdata(s_shipdata):
+	print("data fetch successful, data set")
+	max_forward = s_shipdata.max_forward
+	max_reverse = s_shipdata.max_reverse
+	max_side = s_shipdata.max_side
+	stop_distance = s_shipdata.stop_distance
 
 func _physics_process(delta):
 	if Input.is_action_just_released("action"):
