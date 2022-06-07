@@ -17,7 +17,7 @@ func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-	_connect_to_server()
+	# _connect_to_server()
 
 func _connect_to_server():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
