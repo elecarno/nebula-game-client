@@ -12,12 +12,15 @@ var local_player_id = 0
 sync var players = {}
 sync var player_data = {}
 
+export var use_auth = false
+
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-	# connect_to_server()
+	if not use_auth:
+		connect_to_server()
 
 func connect_to_server():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -50,3 +53,10 @@ func fetch_shipdata(ship_name, requester):
 remote func return_shipdata(s_shipdata, requester):
 	print("recieved data: " + str(s_shipdata))
 	instance_from_id(requester).setdata(s_shipdata)
+	
+func fetch_playerstats():
+	rpc_id(1, "fetch_playerstats")
+
+remote func return_player_stats(stats):
+	print("recieved " + str(stats))
+	get_node("/root/scene_handler/map/gui/player_stats").load_player_stats(stats)
