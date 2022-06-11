@@ -2,7 +2,7 @@ extends Node
 
 # development ip & port
 const DEFAULT_IP = "127.0.0.1"
-const DEFAULT_PORT = 5000
+const DEFAULT_PORT = 1909
 
 var network = NetworkedMultiplayerENet.new()
 var selected_IP
@@ -17,9 +17,9 @@ func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-	# _connect_to_server()
+	# connect_to_server()
 
-func _connect_to_server():
+func connect_to_server():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	network.create_client(DEFAULT_IP, DEFAULT_PORT)
 	get_tree().set_network_peer(network)

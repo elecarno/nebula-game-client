@@ -17,7 +17,7 @@ func _ready():
 	t.start()
 	yield(t, "timeout")
 	# call data fetch from server singleton
-	server.fetch_shipdata("testship", get_instance_id())
+	# server.fetch_shipdata("testship", get_instance_id())
 	# free timer to avoid memory leak
 	t.queue_free()
 	

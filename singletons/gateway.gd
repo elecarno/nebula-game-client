@@ -3,7 +3,7 @@ extends Node
 var network = NetworkedMultiplayerENet.new()
 var gateway_api = MultiplayerAPI.new()
 var ip = "127.0.0.1"
-var port = 5050
+var port = 1910
 
 var username
 var password
@@ -31,14 +31,28 @@ func connect_to_server(_username, _password):
 	network.connect("connection_failed", self, "_on_connection_failed")
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	
-func _on_connnection_failed():
+func _on_connection_failed():
 	print("failed to connect to login server")
 	print("pop-up server offline or something")
 	get_node("../scene_handler/map/gui/login_screen").login_button.disabled = false
 	
-func _on_connnection_succeeded():
+func _on_connection_succeeded():
 	print("successfully connected to login server")
 	request_login()
 	
 func request_login():
-	pass
+	print("connecting to gateway to request login")
+	rpc_id(1, "login_request", username, password)
+	username = ""
+	password = ""
+	
+remote func return_login_request(results):
+	print("results received")
+	if results == true:
+		server.connect_to_server()
+		get_node("../scene_handler/map/gui/login_screen").queue_free()
+	else:
+		print("please provide correct username and password")
+		get_node("../scene_handler/map/gui/login_screen").login_button.disabled = false
+	network.disconnect("connection_failed", self, "_on_connection_failed")
+	network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
