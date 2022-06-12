@@ -11,7 +11,8 @@ func _ready():
 	t.start()
 	yield(t, "timeout")
 	# call data fetch from server singleton
-	server.fetch_playerstats()
+	if not server.use_auth:
+		server.fetch_playerstats()
 	# free timer to avoid memory leak
 	t.queue_free()
 

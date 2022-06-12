@@ -8,11 +8,13 @@ var network = NetworkedMultiplayerENet.new()
 var selected_IP
 var selected_port
 
+var token
+
 var local_player_id = 0
 sync var players = {}
 sync var player_data = {}
 
-export var use_auth = false
+export var use_auth = true
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -41,6 +43,17 @@ func _connected_fail():
 	
 func _server_disconnected():
 	print("server disconnected")
+	
+remote func fetch_token():
+	rpc_id(1, "return_token", token)
+	
+remote func return_token_verification_results(result):
+	if result == true:
+		get_node("../scene_handler/map/gui/login_screen").queue_free()
+		print("successful token verifcation")
+	else:
+		print("login failed, please try again")
+		get_node("../scene_handler/map/gui/login_screen").login_button.disabled = false
 	
 # `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
 func fetch_shipdata(ship_name, requester):

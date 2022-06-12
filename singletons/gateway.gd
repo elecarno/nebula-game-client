@@ -46,11 +46,11 @@ func request_login():
 	username = ""
 	password = ""
 	
-remote func return_login_request(results):
+remote func return_login_request(results, token):
 	print("results received")
 	if results == true:
+		server.token = token
 		server.connect_to_server()
-		get_node("../scene_handler/map/gui/login_screen").queue_free()
 	else:
 		print("please provide correct username and password")
 		get_node("../scene_handler/map/gui/login_screen").login_button.disabled = false
