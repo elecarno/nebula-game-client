@@ -48,12 +48,16 @@ remote func fetch_token():
 	rpc_id(1, "return_token", token)
 	
 remote func return_token_verification_results(result):
+	var alert_label = get_node("../scene_handler/map/gui/login_system/alert_label")
 	if result == true:
-		get_node("../scene_handler/map/gui/login_screen").queue_free()
 		print("successful token verifcation")
+		alert_label.text = "successful token verifcation"
+		get_node("../scene_handler/map/gui/login_system").queue_free()
 	else:
 		print("login failed, please try again")
-		get_node("../scene_handler/map/gui/login_screen").login_button.disabled = false
+		alert_label.text = "login failed, please try again"
+		get_node("../scene_handler/map/gui/login_system").login_button.disabled = false
+		get_node("../scene_handler/map/gui/login_system").create_acc_button.disabled = false
 	
 # `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
 func fetch_shipdata(ship_name, requester):
