@@ -47,6 +47,7 @@ texture = ExtResource( 3 )
 
 [node name="hover_sprite" type="Sprite" parent="door_button"]
 visible = false
+z_index = 2
 texture = ExtResource( 4 )
 
 [node name="button_col" type="CollisionShape2D" parent="door_button"]

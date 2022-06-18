@@ -53,11 +53,24 @@ remote func return_token_verification_results(result):
 		print("successful token verifcation")
 		alert_label.text = "successful token verifcation"
 		get_node("../scene_handler/map/gui/login_system").queue_free()
+		get_node("../scene_handler/map/player").set_physics_process(true)
 	else:
 		print("login failed, please try again")
 		alert_label.text = "login failed, please try again"
 		get_node("../scene_handler/map/gui/login_system").login_button.disabled = false
 		get_node("../scene_handler/map/gui/login_system").create_acc_button.disabled = false
+		
+func send_player_state(player_state):
+	rpc_unreliable_id(1, "recieve_player_state", player_state)
+
+remote func recieve_world_state(world_state):
+	get_node("../scene_handler/map").update_world_state(world_state)
+		
+remote func spawn_new_player(player_id, spawn_pos):
+	get_node("../scene_handler/map").spawn_new_player(player_id, spawn_pos)
+	
+remote func despawn_player(player_id):
+	get_node("../scene_handler/map").despawn_player(player_id)
 	
 # `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
 func fetch_shipdata(ship_name, requester):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://player/player_scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://player/player_scripts/player_template.gd" type="Script" id=1]
 [ext_resource path="res://player/player_sprites/character_three_body.png" type="Texture" id=2]
 [ext_resource path="res://player/player_sprites/character_three_head.png" type="Texture" id=3]
 [ext_resource path="res://player/player_sprites/character_three_frontarm.png" type="Texture" id=4]
@@ -12,7 +12,8 @@ extents = Vector2( 2.5, 5 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 5.5 )
 
-[node name="player" type="KinematicBody2D"]
+[node name="player_template" type="KinematicBody2D"]
+collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="col_shape_2d" type="CollisionShape2D" parent="."]
@@ -33,7 +34,6 @@ texture = ExtResource( 5 )
 offset = Vector2( 0, 1.5 )
 
 [node name="body" type="Sprite" parent="player_body"]
-modulate = Color( 0, 0.0431373, 0.705882, 1 )
 texture = ExtResource( 2 )
 
 [node name="head" type="Sprite" parent="player_body"]
@@ -54,11 +54,3 @@ position = Vector2( 0, 3 )
 enabled = true
 cast_to = Vector2( 0, 30 )
 collision_mask = 2
-
-[node name="cam2d" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.1, 0.1 )
-smoothing_enabled = true
-smoothing_speed = 20.0
-
-[connection signal="body_entered" from="area2d" to="." method="_on_area2d_body_entered"]
