@@ -30,7 +30,7 @@ shape = SubResource( 1 )
 [node name="player" parent="." instance=ExtResource( 7 )]
 enabled = false
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="tilemap" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1
