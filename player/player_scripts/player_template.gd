@@ -5,8 +5,11 @@ onready var backarm = get_node("player_body/backarm")
 onready var body = get_node("player_body/body")
 onready var head = get_node("player_body/head")
 
-func update_player(player_state):
-	set_position(player_state["p"])
+func _player_identity():
+	pass
+
+func update_player(new_position, player_state):
+	set_position(new_position)
 	head.global_rotation = player_state["rot"]
 	if player_state["flip"] == true:
 		body.set_flip_h(true)

@@ -19,6 +19,9 @@ var flip = false
 func _ready():
 	set_physics_process(false)
 
+func _player_identity():
+	pass
+
 func _physics_process(delta):
 	# control switching
 	if Input.is_action_just_released("action"):
