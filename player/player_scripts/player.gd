@@ -5,7 +5,6 @@ export var enabled = true
 onready var cam = get_node("cam2d")
 onready var intr_cast = get_node("player_body/frontarm/intr_cast")
 onready var frontarm = get_node("player_body/frontarm")
-onready var backarm = get_node("player_body/backarm")
 onready var body = get_node("player_body/body")
 onready var head = get_node("player_body/head")
 
@@ -64,14 +63,11 @@ func _physics_process(delta):
 		flip = true
 		body.set_flip_h(true)
 		frontarm.set_flip_h(true)
-		frontarm.offset = Vector2(0, 1.5)
-		frontarm.position = Vector2(1.5, -1.5)
-		backarm.set_flip_h(true)
-		backarm.offset = Vector2(0, 1.5)
-		backarm.position = Vector2(1.5, -1.5)
+		frontarm.offset = Vector2(1, 2)
+		frontarm.position = Vector2(2, -4)
 		head.set_flip_h(true)
-		head.offset = Vector2(-1, -1)
-		head.position = Vector2(0.5, -3.5)
+		head.offset = Vector2(-0.5, -1)
+		head.position = Vector2(0.5, -5)
 		head.global_rotation = atan2(-look_vec.y, -look_vec.x)
 		if rotate:
 			frontarm.global_rotation = atan2(-look_vec.y, -look_vec.x) + PI/2
@@ -81,14 +77,11 @@ func _physics_process(delta):
 		flip = false
 		body.set_flip_h(false)
 		frontarm.set_flip_h(false)
-		frontarm.offset = Vector2(0, 1.5)
-		frontarm.position = Vector2(-1.5, -1.5)
-		backarm.set_flip_h(false)
-		backarm.offset = Vector2(0, 1.5)
-		backarm.position = Vector2(-1.5, -1.5)
+		frontarm.offset = Vector2(-1, 2)
+		frontarm.position = Vector2(-2, -4)
 		head.set_flip_h(false)
-		head.offset = Vector2(1, -1)
-		head.position = Vector2(-0.5, -3.5)
+		head.offset = Vector2(0.5, -1)
+		head.position = Vector2(-0.5, -5)
 		head.global_rotation = atan2(look_vec.y, look_vec.x)
 		if rotate:
 			frontarm.global_rotation = atan2(look_vec.y, look_vec.x) - PI/2

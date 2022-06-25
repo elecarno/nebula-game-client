@@ -1,50 +1,43 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://player/player_scripts/player.gd" type="Script" id=1]
-[ext_resource path="res://player/player_sprites/character_three_body.png" type="Texture" id=2]
-[ext_resource path="res://player/player_sprites/character_three_head.png" type="Texture" id=3]
-[ext_resource path="res://player/player_sprites/character_three_frontarm.png" type="Texture" id=4]
-[ext_resource path="res://player/player_sprites/character_three_backarm.png" type="Texture" id=5]
+[ext_resource path="res://player/player_sprites/character_4_body.png" type="Texture" id=2]
+[ext_resource path="res://player/player_sprites/character_4_front_arm.png" type="Texture" id=3]
+[ext_resource path="res://player/player_sprites/character_4_head.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.5, 5 )
+extents = Vector2( 5, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3, 5.5 )
+extents = Vector2( 6, 8.5 )
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
 [node name="col_shape_2d" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1.5 )
+position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [node name="area2d" type="Area2D" parent="."]
 
 [node name="col_shape_2d" type="CollisionShape2D" parent="area2d"]
-position = Vector2( 0, -1.5 )
+position = Vector2( 0, 0.5 )
 shape = SubResource( 2 )
 
 [node name="player_body" type="Node2D" parent="."]
 
-[node name="backarm" type="Sprite" parent="player_body"]
-position = Vector2( -1.5, -1.5 )
-texture = ExtResource( 5 )
-offset = Vector2( 0, 1.5 )
-
 [node name="body" type="Sprite" parent="player_body"]
-modulate = Color( 0, 0.0431373, 0.705882, 1 )
 texture = ExtResource( 2 )
 
 [node name="head" type="Sprite" parent="player_body"]
-position = Vector2( -0.5, -3.5 )
-texture = ExtResource( 3 )
-offset = Vector2( 1, -1 )
+position = Vector2( -0.5, -5 )
+texture = ExtResource( 4 )
+offset = Vector2( 0.5, -1 )
 
 [node name="frontarm" type="Sprite" parent="player_body"]
-position = Vector2( -1.5, -1.5 )
-texture = ExtResource( 4 )
-offset = Vector2( 0, 1.5 )
+position = Vector2( -2, -4 )
+texture = ExtResource( 3 )
+offset = Vector2( -1, 2 )
 __meta__ = {
 "_editor_description_": ""
 }
