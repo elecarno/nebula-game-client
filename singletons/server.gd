@@ -16,6 +16,12 @@ sync var player_data = {}
 
 export var use_auth = true
 
+var client_clock = 0
+var decimal_collector : float = 0
+var latency_array = []
+var latency = 0
+var delta_latency = 0
+
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
@@ -23,6 +29,20 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 	if not use_auth:
 		connect_to_server()
+		
+func _physics_process(delta): # 0.01667 = 1 / 60
+	client_clock += int(delta*1000) + delta_latency
+	delta_latency = 0
+	decimal_collector += (delta * 1000) - int(delta * 1000)
+	if decimal_collector >= 1.00:
+		client_clock += 1
+		decimal_collector -= 1.00
+		
+	var unix_time = round(client_clock / 1000)
+	var time : Dictionary = OS.get_datetime_from_unix_time(unix_time);
+	var display_string : String = "%02d:%02d:%02d" % [time.hour, time.minute, time.second];
+	# var display_string : String = "%d/%02d/%02d %02d:%02d:%02d" % [time.year, time.month, time.day, time.hour, time.minute, time.second];
+	get_node("../scene_handler/map/gui/clock").text = display_string
 
 func connect_to_server():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -37,7 +57,35 @@ func _player_disconnected(id):
 	
 func _connected_ok():
 	print("successfully connected to server")
+	rpc_id(1, "fetch_server_time", OS.get_system_time_msecs())
+	var timer = Timer.new()
+	timer.wait_time = 0.5
+	timer.autostart = true
+	timer.connect("timeout", self, "determine_latency")
+	self.add_child(timer)
+
+remote func return_server_time(server_time, client_time):
+	latency = (OS.get_system_time_msecs() - client_time) / 2
+	client_clock = server_time + latency
 	
+func determine_latency():
+	rpc_id(1, "determine_latency", OS.get_system_time_msecs())
+	
+remote func return_latency(client_time):
+	latency_array.append((OS.get_system_time_msecs() - client_time) / 2)
+	if latency_array.size() == 9:
+		var total_latency = 0
+		latency_array.sort()
+		var mid_point = latency_array[4]
+		for i in range(latency_array.size()-1, -1, -1):
+			if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
+				latency_array.remove(i)
+			else:
+				total_latency += latency_array[i]
+		delta_latency = (total_latency / latency_array.size()) - latency
+		latency = total_latency / latency_array.size()
+		latency_array.clear()
+
 func _connected_fail():
 	print("failed to connect to server")
 	
