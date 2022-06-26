@@ -7,12 +7,14 @@ onready var intr_cast = get_node("player_body/frontarm/intr_cast")
 onready var frontarm = get_node("player_body/frontarm")
 onready var body = get_node("player_body/body")
 onready var head = get_node("player_body/head")
+onready var anim = get_node("player_body/anim_player")
 
 const move_speed = 100
 var gravity = true
 
 var player_state
 var moving = false
+var walking = false
 var flip = false
 
 func _ready():
@@ -43,6 +45,17 @@ func _physics_process(delta):
 			move_vec.x -=1
 		if Input.is_action_pressed("move_right"):
 			move_vec.x +=1
+		
+		# probably a better way to do this
+		if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
+			walking = true
+		else:
+			walking = false
+	
+	if walking:
+		anim.play("walk")
+	else:
+		anim.play("idle")
 			
 	move_vec = move_vec.normalized()
 	move_and_collide(move_vec * move_speed * delta)
@@ -101,6 +114,7 @@ func define_player_state():
 		"t": OS.get_system_time_msecs(), 
 		"p": get_global_position(),
 		"rot": head.global_rotation,
+		"armrot": frontarm.global_rotation,
 		"flip": flip
 	}
 	server.send_player_state(player_state)

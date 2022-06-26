@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/player_scripts/player.gd" type="Script" id=1]
-[ext_resource path="res://player/player_sprites/character_4_body.png" type="Texture" id=2]
+[ext_resource path="res://player/player_sprites_animated/character_4_animation_sheet.png" type="Texture" id=2]
 [ext_resource path="res://player/player_sprites/character_4_front_arm.png" type="Texture" id=3]
 [ext_resource path="res://player/player_sprites/character_4_head.png" type="Texture" id=4]
 
@@ -10,6 +10,39 @@ extents = Vector2( 5, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 8.5 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -26,8 +59,14 @@ shape = SubResource( 2 )
 
 [node name="player_body" type="Node2D" parent="."]
 
+[node name="anim_player" type="AnimationPlayer" parent="player_body"]
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 3 )
+
 [node name="body" type="Sprite" parent="player_body"]
 texture = ExtResource( 2 )
+hframes = 8
+vframes = 2
 
 [node name="head" type="Sprite" parent="player_body"]
 position = Vector2( -0.5, -5 )

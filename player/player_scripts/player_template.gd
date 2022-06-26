@@ -10,6 +10,7 @@ func _player_identity():
 func update_player(new_position, player_state):
 	set_position(new_position)
 	head.global_rotation = player_state["rot"]
+	frontarm.global_rotation = player_state["armrot"]
 	if player_state["flip"] == true:
 		body.set_flip_h(true)
 		frontarm.set_flip_h(true)
