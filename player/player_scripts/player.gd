@@ -22,6 +22,7 @@ var flip = false
 var head_look_offset = 0
 
 func _ready():
+	anim.play("idle_down")
 	set_physics_process(false)
 
 func _physics_process(delta):
@@ -91,6 +92,7 @@ func _physics_process(delta):
 			collider._on_interact()
 		else:
 			if rotate == true:
+				server.send_attack(position, frontarm.rotation_degrees + 90, frontarm.rotation + PI/2)
 				var bullet_instance = bullet.instance()
 				bullet_instance.position = proj_spawn.global_position
 				bullet_instance.rotation_degrees = frontarm.rotation_degrees + 90

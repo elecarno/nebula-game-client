@@ -120,6 +120,15 @@ remote func spawn_new_player(player_id, spawn_pos):
 remote func despawn_player(player_id):
 	get_node("../scene_handler/map").despawn_player(player_id)
 	
+func send_attack(position, rotation_deg, rotation):
+	rpc_id(1, "attack", position, rotation_deg, rotation, client_clock)
+	
+remote func recieve_attack(position, rotation_deg, rotation, spawn_time, player_id):
+	if player_id == get_tree().get_network_unique_id():
+		pass
+	else:
+		get_node("../scene_handler/map/other_players/" + str(player_id)).attack_dict[spawn_time] = {"position": position, "rotdeg": rotation_deg, "rot": rotation}
+	
 # `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
 func fetch_shipdata(ship_name, requester):
 	rpc_id(1, "fetch_shipdata", ship_name, requester)

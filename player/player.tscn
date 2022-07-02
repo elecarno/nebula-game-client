@@ -133,6 +133,7 @@ anims/walk = SubResource( 3 )
 position = Vector2( 0.5, 0 )
 texture = ExtResource( 2 )
 vframes = 5
+frame = 2
 
 [node name="frontarm" type="Sprite" parent="player_body/body"]
 position = Vector2( -2.5, -4.5 )
