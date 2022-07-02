@@ -72,6 +72,8 @@ tile_data = PoolIntArray( -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 
 
 [node name="other_players" type="YSort" parent="."]
 
+[node name="enemies" type="YSort" parent="."]
+
 [node name="gui" type="CanvasLayer" parent="."]
 
 [node name="clock" type="Label" parent="gui"]

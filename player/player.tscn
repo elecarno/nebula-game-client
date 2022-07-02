@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/player_scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://player/player_sprites_animated/character_4_animation_sheet.png" type="Texture" id=2]
 [ext_resource path="res://player/player_sprites/character_4_front_arm.png" type="Texture" id=3]
 [ext_resource path="res://player/player_sprites/character_4_head.png" type="Texture" id=4]
+[ext_resource path="res://player/items/rifle.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 7.5 )
@@ -80,6 +81,11 @@ offset = Vector2( -1, 2 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="held_item" type="Sprite" parent="player_body/frontarm"]
+position = Vector2( -2, 6.5 )
+rotation = 1.5708
+texture = ExtResource( 5 )
 
 [node name="intr_cast" type="RayCast2D" parent="player_body/frontarm"]
 position = Vector2( 0, 3 )

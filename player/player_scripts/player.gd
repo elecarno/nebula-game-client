@@ -7,6 +7,7 @@ onready var intr_cast = get_node("player_body/frontarm/intr_cast")
 onready var frontarm = get_node("player_body/frontarm")
 onready var body = get_node("player_body/body")
 onready var head = get_node("player_body/head")
+onready var item = get_node("player_body/frontarm/held_item")
 onready var anim = get_node("player_body/anim_player")
 
 const move_speed = 100
@@ -65,7 +66,7 @@ func _physics_process(delta):
 	if Input.is_action_just_released("lmb") and intr_cast.is_colliding():
 		var collider = intr_cast.get_collider()
 		collider._on_interact()
-	if Input.is_action_pressed("lmb"):
+	if Input.is_action_pressed("rmb"):
 		rotate = true
 	else:
 		rotate = false
@@ -78,6 +79,8 @@ func _physics_process(delta):
 		frontarm.set_flip_h(true)
 		frontarm.offset = Vector2(1, 2)
 		frontarm.position = Vector2(2, -4)
+		item.set_flip_v(true)
+		item.position = Vector2(2, 6.5)
 		head.set_flip_h(true)
 		head.offset = Vector2(-0.5, -1)
 		head.position = Vector2(0.5, -5)
@@ -92,6 +95,8 @@ func _physics_process(delta):
 		frontarm.set_flip_h(false)
 		frontarm.offset = Vector2(-1, 2)
 		frontarm.position = Vector2(-2, -4)
+		item.set_flip_v(false)
+		item.position = Vector2(-2, 6.5)
 		head.set_flip_h(false)
 		head.offset = Vector2(0.5, -1)
 		head.position = Vector2(-0.5, -5)
@@ -115,6 +120,7 @@ func define_player_state():
 		"p": get_global_position(),
 		"rot": head.global_rotation,
 		"armrot": frontarm.global_rotation,
-		"flip": flip
+		"flip": flip,
+		"anim": anim.current_animation
 	}
 	server.send_player_state(player_state)

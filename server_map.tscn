@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://environment/tileset_one.tres" type="TileSet" id=3]
+[ext_resource path="res://environment/button_door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://environment/auto_door.tscn" type="PackedScene" id=6]
+
+[node name="map" type="Node2D"]
+
+[node name="station" type="YSort" parent="."]
+sort_enabled = false
+
+[node name="button_door" parent="station" instance=ExtResource( 5 )]
+position = Vector2( 56, 24 )
+z_index = 1
+
+[node name="auto_door" parent="station" instance=ExtResource( 6 )]
+position = Vector2( 104, 24 )
+z_index = 1
+
+[node name="tilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 0, 0, -327678, 0, 0, -327675, 3, 0, -327673, 0, 0, -262142, 0, 0, -262139, 3, 0, -262137, 0, 0, -196606, 0, 0, -196601, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 2, 0, -131068, 2, 0, -131065, 0, 0, -3, 0, 0, -65529, 0, 0, 65533, 0, 0, 7, 0, 0, 131062, 0, 0, 131063, 2, 0, 131064, 2, 0, 131065, 2, 0, 131066, 2, 0, 131067, 2, 0, 131068, 2, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65540, 0, 0, 65541, 0, 0, 65543, 0, 0, 131074, 0, 0, 131079, 0, 0, 196615, 0, 0, 262151, 0, 0, 327682, 0, 0, 327687, 0, 0, 458742, 0, 0, 458743, 2, 0, 458744, 2, 0, 458745, 2, 0, 458746, 2, 0, 458747, 2, 0, 458748, 2, 0, 458749, 2, 0, 458750, 0, 0, 458751, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393223, 0, 0, 524286, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 589822, 0, 0, 524293, 0, 0, 655358, 0, 0, 589829, 0, 0, 720894, 0, 0, 720895, 0, 0, 655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0 )
+
+[node name="other_players" type="YSort" parent="."]
+
+[node name="enemies" type="YSort" parent="."]
