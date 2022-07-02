@@ -2,6 +2,7 @@ extends Node2D
 
 var player_spawn = preload("res://player/player_template.tscn")
 var enemy_spawn = preload("res://enemies/enemy_template.tscn")
+var bullet_spawn = preload("res://player/bullet.tscn")
 var last_world_state = 0 # is a timestamp, not an actual state
 
 # [previous past, most recent past, nearest future, further future]

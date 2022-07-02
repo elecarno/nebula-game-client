@@ -123,13 +123,13 @@ remote func despawn_player(player_id):
 # `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
 func fetch_shipdata(ship_name, requester):
 	rpc_id(1, "fetch_shipdata", ship_name, requester)
-	print("fetching data for: " + ship_name)
+	# print("fetching data for: " + ship_name)
 
 # this function is a called from the server, hence the `remote` tag
 # `s_` identifies variables from server, `instance_from_id` references
 # the id of the initial caller from `fetch_shipdata`
 remote func return_shipdata(s_shipdata, requester):
-	print("recieved data: " + str(s_shipdata))
+	# print("recieved data: " + str(s_shipdata))
 	instance_from_id(requester).setdata(s_shipdata)
 	
 func npc_hit(enemy_id, damage):
@@ -139,5 +139,5 @@ func fetch_playerstats():
 	rpc_id(1, "fetch_playerstats")
 
 remote func return_player_stats(stats):
-	print("recieved " + str(stats))
+	# print("recieved " + str(stats))
 	get_node("/root/scene_handler/map/gui/player_stats").load_player_stats(stats)

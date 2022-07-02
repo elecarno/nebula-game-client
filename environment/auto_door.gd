@@ -16,9 +16,9 @@ func _close_door()	:
 	door_col.set_deferred("disabled", false)
 
 func _on_door_trigger_1_body_entered(body):
-	if body.has_method("_player_identity"):
+	if body.is_in_group("players"):
 		_open_door()
 
 func _on_door_trigger_1_body_exited(body):
-	if body.has_method("_player_identity"):
+	if body.is_in_group("players"):
 		_close_door()
