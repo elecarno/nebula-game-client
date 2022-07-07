@@ -9,6 +9,7 @@ onready var rightarm = get_node("player_body/body/rightarm")
 onready var body = get_node("player_body/body")
 onready var head = get_node("player_body/head")
 onready var item = get_node("player_body/body/frontarm/held_item")
+onready var muzzle_flash = get_node("player_body/body/frontarm/muzzle_flash")
 onready var anim = get_node("player_body/anim_player")
 onready var armanim = get_node("player_body/rightarm_anim")
 onready var proj_spawn = get_node("player_body/body/frontarm/proj_spawn")
@@ -63,7 +64,7 @@ func _physics_process(delta):
 			frontarm.visible = true
 		if Input.is_action_pressed("move_up"):
 			move_vec.y -=1
-			configure_character("walk_up", "arm_walk_up", Vector2(1.5, -4.5), true, PI/2, true, true)
+			configure_character("walk_up", "arm_walk_up", Vector2(1.5, -4.5), true, PI/2 * -1, true, true)
 		if Input.is_action_pressed("move_down"):
 			move_vec.y +=1
 			configure_character("walk_down", "arm_walk_down", Vector2(-2.5, -4.5), false, PI/2, false, true)
@@ -103,6 +104,7 @@ func _physics_process(delta):
 		else:
 			if rotate == true:
 				server.send_attack(position, frontarm.rotation_degrees + 90, frontarm.rotation + PI/2)
+				muzzle_flash.emitting = true
 				var bullet_instance = bullet.instance()
 				bullet_instance.position = proj_spawn.global_position
 				bullet_instance.rotation_degrees = frontarm.rotation_degrees + 90
