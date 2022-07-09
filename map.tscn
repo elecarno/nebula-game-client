@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://effects/bg_2.png" type="Texture" id=1]
 [ext_resource path="res://effects/spotlight.png" type="Texture" id=2]
@@ -23,6 +23,9 @@
 [ext_resource path="res://ui/helmet_icon.png" type="Texture" id=21]
 [ext_resource path="res://effects/bg_1b.png" type="Texture" id=22]
 [ext_resource path="res://ui/pixeled_override.tres" type="DynamicFont" id=23]
+[ext_resource path="res://environment/station_pieces/horizontal_connector_walls.png" type="Texture" id=24]
+[ext_resource path="res://environment/station_pieces/horizontal_connector_top.png" type="Texture" id=25]
+[ext_resource path="res://environment/station_pieces/horizontal_connector_floor.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 7, 21 )
@@ -77,6 +80,24 @@ scale = 0.05
 scale_random = 0.3
 hue_variation = -0.04
 hue_variation_random = 0.35
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 80, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 28.5, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 24, 12 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 24.5, 12 )
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 31.5, 2 )
+
+[sub_resource type="OccluderPolygon2D" id=25]
+polygon = PoolVector2Array( -80, -48, 80, -48, 80, -40, -80, -40 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.0590717, 1 )
@@ -137,24 +158,6 @@ texture = ExtResource( 10 )
 [node name="station" type="YSort" parent="."]
 position = Vector2( -602, -7 )
 sort_enabled = false
-
-[node name="blue_light2" type="Light2D" parent="station"]
-position = Vector2( -80, -98 )
-texture = ExtResource( 2 )
-offset = Vector2( -24, -6 )
-texture_scale = 0.4
-color = Color( 0.658824, 0.992157, 1, 1 )
-energy = 1.5
-shadow_enabled = true
-
-[node name="blue_light3" type="Light2D" parent="station"]
-position = Vector2( -17, -98 )
-texture = ExtResource( 2 )
-offset = Vector2( -24, -6 )
-texture_scale = 0.4
-color = Color( 0.658824, 0.992157, 1, 1 )
-energy = 1.5
-shadow_enabled = true
 
 [node name="button_door" parent="station" instance=ExtResource( 5 )]
 position = Vector2( 142, -6 )
@@ -267,6 +270,346 @@ lifetime = 20.0
 preprocess = 40.0
 process_material = SubResource( 16 )
 texture = ExtResource( 11 )
+
+[node name="blocker" type="Polygon2D" parent="station/lounge"]
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -117, -109, -117, 16, -230, 16, -230, -164, 161, -163, 232, -103, 232, 88, 116, 88, 116, -36, 43, -107 )
+
+[node name="blue_light2" type="Light2D" parent="station/lounge"]
+position = Vector2( -80, -98 )
+texture = ExtResource( 2 )
+offset = Vector2( -24, -6 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light3" type="Light2D" parent="station/lounge"]
+position = Vector2( -17, -98 )
+texture = ExtResource( 2 )
+offset = Vector2( -24, -6 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="h_connector" type="Node2D" parent="station"]
+position = Vector2( 200, 136 )
+
+[node name="blue_light4" type="Light2D" parent="station/h_connector"]
+position = Vector2( -40, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light5" type="Light2D" parent="station/h_connector"]
+position = Vector2( -72, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light6" type="Light2D" parent="station/h_connector"]
+position = Vector2( 72, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light7" type="Light2D" parent="station/h_connector"]
+position = Vector2( 40, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="area" type="StaticBody2D" parent="station/h_connector"]
+
+[node name="col_top" type="CollisionShape2D" parent="station/h_connector/area"]
+position = Vector2( 0, -42.5 )
+z_index = 2
+shape = SubResource( 21 )
+
+[node name="col_detail" type="CollisionShape2D" parent="station/h_connector/area"]
+position = Vector2( -51.5, -33.5 )
+z_index = 2
+shape = SubResource( 26 )
+
+[node name="col_detail2" type="CollisionShape2D" parent="station/h_connector/area"]
+position = Vector2( 51.5, -33.5 )
+z_index = 2
+shape = SubResource( 26 )
+
+[node name="col_bottom" type="CollisionShape2D" parent="station/h_connector/area"]
+position = Vector2( -56, 28 )
+z_index = 2
+shape = SubResource( 22 )
+
+[node name="col_bottom2" type="CollisionShape2D" parent="station/h_connector/area"]
+position = Vector2( 55.5, 28 )
+z_index = 2
+shape = SubResource( 23 )
+
+[node name="col_bottom3" type="CollisionShape2D" parent="station/h_connector/area"]
+position = Vector2( -1, 42 )
+z_index = 2
+shape = SubResource( 24 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/h_connector/area"]
+occluder = SubResource( 25 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/h_connector/area"]
+position = Vector2( 0, 64 )
+occluder = SubResource( 25 )
+
+[node name="top" type="Sprite" parent="station/h_connector"]
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="floor" type="Sprite" parent="station/h_connector"]
+texture = ExtResource( 26 )
+
+[node name="walls" type="Sprite" parent="station/h_connector"]
+texture = ExtResource( 24 )
+
+[node name="steam" type="Particles2D" parent="station/h_connector"]
+position = Vector2( 56, -35 )
+rotation = 3.14159
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="steam2" type="Particles2D" parent="station/h_connector"]
+position = Vector2( -56, -34 )
+rotation = -2.87979
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="blocker" type="Polygon2D" parent="station/h_connector"]
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -80, -47, 80, -47, 80, -102, -80, -102 )
+
+[node name="h_connector2" type="Node2D" parent="station"]
+position = Vector2( 360, 136 )
+
+[node name="blue_light4" type="Light2D" parent="station/h_connector2"]
+position = Vector2( -40, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light5" type="Light2D" parent="station/h_connector2"]
+position = Vector2( -72, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light6" type="Light2D" parent="station/h_connector2"]
+position = Vector2( 72, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light7" type="Light2D" parent="station/h_connector2"]
+position = Vector2( 40, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="area" type="StaticBody2D" parent="station/h_connector2"]
+
+[node name="col_top" type="CollisionShape2D" parent="station/h_connector2/area"]
+position = Vector2( 0, -42.5 )
+z_index = 2
+shape = SubResource( 21 )
+
+[node name="col_detail" type="CollisionShape2D" parent="station/h_connector2/area"]
+position = Vector2( -51.5, -33.5 )
+z_index = 2
+shape = SubResource( 26 )
+
+[node name="col_detail2" type="CollisionShape2D" parent="station/h_connector2/area"]
+position = Vector2( 51.5, -33.5 )
+z_index = 2
+shape = SubResource( 26 )
+
+[node name="col_bottom" type="CollisionShape2D" parent="station/h_connector2/area"]
+position = Vector2( -56, 28 )
+z_index = 2
+shape = SubResource( 22 )
+
+[node name="col_bottom2" type="CollisionShape2D" parent="station/h_connector2/area"]
+position = Vector2( 55.5, 28 )
+z_index = 2
+shape = SubResource( 23 )
+
+[node name="col_bottom3" type="CollisionShape2D" parent="station/h_connector2/area"]
+position = Vector2( -1, 42 )
+z_index = 2
+shape = SubResource( 24 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/h_connector2/area"]
+occluder = SubResource( 25 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/h_connector2/area"]
+position = Vector2( 0, 64 )
+occluder = SubResource( 25 )
+
+[node name="top" type="Sprite" parent="station/h_connector2"]
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="floor" type="Sprite" parent="station/h_connector2"]
+texture = ExtResource( 26 )
+
+[node name="walls" type="Sprite" parent="station/h_connector2"]
+texture = ExtResource( 24 )
+
+[node name="steam" type="Particles2D" parent="station/h_connector2"]
+position = Vector2( 56, -35 )
+rotation = 3.14159
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="steam2" type="Particles2D" parent="station/h_connector2"]
+position = Vector2( -56, -34 )
+rotation = -2.87979
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="blocker" type="Polygon2D" parent="station/h_connector2"]
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -80, -47, 80, -47, 80, -102, -80, -102 )
+
+[node name="h_connector3" type="Node2D" parent="station"]
+position = Vector2( 520, 136 )
+
+[node name="blue_light4" type="Light2D" parent="station/h_connector3"]
+position = Vector2( -40, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light5" type="Light2D" parent="station/h_connector3"]
+position = Vector2( -72, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light6" type="Light2D" parent="station/h_connector3"]
+position = Vector2( 72, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="blue_light7" type="Light2D" parent="station/h_connector3"]
+position = Vector2( 40, -21 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.658824, 0.992157, 1, 1 )
+energy = 1.5
+shadow_enabled = true
+
+[node name="area" type="StaticBody2D" parent="station/h_connector3"]
+
+[node name="col_top" type="CollisionShape2D" parent="station/h_connector3/area"]
+position = Vector2( 0, -42.5 )
+z_index = 2
+shape = SubResource( 21 )
+
+[node name="col_detail" type="CollisionShape2D" parent="station/h_connector3/area"]
+position = Vector2( -51.5, -33.5 )
+z_index = 2
+shape = SubResource( 26 )
+
+[node name="col_detail2" type="CollisionShape2D" parent="station/h_connector3/area"]
+position = Vector2( 51.5, -33.5 )
+z_index = 2
+shape = SubResource( 26 )
+
+[node name="col_bottom" type="CollisionShape2D" parent="station/h_connector3/area"]
+position = Vector2( -56, 28 )
+z_index = 2
+shape = SubResource( 22 )
+
+[node name="col_bottom2" type="CollisionShape2D" parent="station/h_connector3/area"]
+position = Vector2( 55.5, 28 )
+z_index = 2
+shape = SubResource( 23 )
+
+[node name="col_bottom3" type="CollisionShape2D" parent="station/h_connector3/area"]
+position = Vector2( -1, 42 )
+z_index = 2
+shape = SubResource( 24 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/h_connector3/area"]
+occluder = SubResource( 25 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/h_connector3/area"]
+position = Vector2( 0, 64 )
+occluder = SubResource( 25 )
+
+[node name="top" type="Sprite" parent="station/h_connector3"]
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="floor" type="Sprite" parent="station/h_connector3"]
+texture = ExtResource( 26 )
+
+[node name="walls" type="Sprite" parent="station/h_connector3"]
+texture = ExtResource( 24 )
+
+[node name="steam" type="Particles2D" parent="station/h_connector3"]
+position = Vector2( 56, -35 )
+rotation = 3.14159
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="steam2" type="Particles2D" parent="station/h_connector3"]
+position = Vector2( -56, -34 )
+rotation = -2.87979
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="blocker" type="Polygon2D" parent="station/h_connector3"]
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -80, -47, 80, -47, 80, -102, -80, -102 )
 
 [node name="player" parent="." instance=ExtResource( 7 )]
 position = Vector2( -648, -31 )
