@@ -62,26 +62,28 @@ func _connected_ok():
 	self.add_child(timer)
 
 remote func return_server_time(server_time, client_time):
-	latency = (OS.get_system_time_msecs() - client_time) / 2
-	client_clock = server_time + latency
-	
+	if get_tree().get_rpc_sender_id() == 1:
+		latency = (OS.get_system_time_msecs() - client_time) / 2
+		client_clock = server_time + latency
+
 func determine_latency():
 	rpc_id(1, "determine_latency", OS.get_system_time_msecs())
 	
 remote func return_latency(client_time):
-	latency_array.append((OS.get_system_time_msecs() - client_time) / 2)
-	if latency_array.size() == 9:
-		var total_latency = 0
-		latency_array.sort()
-		var mid_point = latency_array[4]
-		for i in range(latency_array.size()-1, -1, -1):
-			if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
-				latency_array.remove(i)
-			else:
-				total_latency += latency_array[i]
-		delta_latency = (total_latency / latency_array.size()) - latency
-		latency = total_latency / latency_array.size()
-		latency_array.clear()
+	if get_tree().get_rpc_sender_id() == 1:
+		latency_array.append((OS.get_system_time_msecs() - client_time) / 2)
+		if latency_array.size() == 9:
+			var total_latency = 0
+			latency_array.sort()
+			var mid_point = latency_array[4]
+			for i in range(latency_array.size()-1, -1, -1):
+				if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
+					latency_array.remove(i)
+				else:
+					total_latency += latency_array[i]
+			delta_latency = (total_latency / latency_array.size()) - latency
+			latency = total_latency / latency_array.size()
+			latency_array.clear()
 
 func _connected_fail():
 	print("failed to connect to server")
@@ -93,40 +95,45 @@ remote func fetch_token():
 	rpc_id(1, "return_token", token)
 	
 remote func return_token_verification_results(result):
-	var alert_label = get_node("../scene_handler/map/gui/login_system/alert_label")
-	if result == true:
-		print("successful token verifcation")
-		alert_label.text = "successful token verifcation"
-		get_node("../scene_handler/map/gui/login_system").queue_free()
-		get_node("../scene_handler/map/player").set_physics_process(true)
-		fetch_playerdata()
-	else:
-		print("login failed, please try again")
-		alert_label.text = "login failed, please try again"
-		get_node("../scene_handler/map/gui/login_system").login_button.disabled = false
-		get_node("../scene_handler/map/gui/login_system").create_acc_button.disabled = false
-		playeruser = ""
+	if get_tree().get_rpc_sender_id() == 1:
+		var alert_label = get_node("../scene_handler/map/gui/login_system/alert_label")
+		if result == true:
+			print("successful token verifcation")
+			alert_label.text = "successful token verifcation"
+			get_node("../scene_handler/map/gui/login_system").queue_free()
+			get_node("../scene_handler/map/player").set_physics_process(true)
+			fetch_playerdata()
+		else:
+			print("login failed, please try again")
+			alert_label.text = "login failed, please try again"
+			get_node("../scene_handler/map/gui/login_system").login_button.disabled = false
+			get_node("../scene_handler/map/gui/login_system").create_acc_button.disabled = false
+			playeruser = ""
 		
 func send_player_state(player_state):
 	rpc_unreliable_id(1, "recieve_player_state", player_state)
 
 remote func recieve_world_state(world_state):
-	get_node("../scene_handler/map").update_world_state(world_state)
+	if get_tree().get_rpc_sender_id() == 1:
+		get_node("../scene_handler/map").update_world_state(world_state)
 		
 remote func spawn_new_player(player_id, spawn_pos):
-	get_node("../scene_handler/map").spawn_new_player(player_id, spawn_pos)
+	if get_tree().get_rpc_sender_id() == 1:
+		get_node("../scene_handler/map").spawn_new_player(player_id, spawn_pos)
 	
 remote func despawn_player(player_id):
-	get_node("../scene_handler/map").despawn_player(player_id)
+	if get_tree().get_rpc_sender_id() == 1:
+		get_node("../scene_handler/map").despawn_player(player_id)
 	
 func send_attack(position, rotation_deg, rotation):
 	rpc_id(1, "attack", position, rotation_deg, rotation, client_clock)
 	
 remote func recieve_attack(position, rotation_deg, rotation, spawn_time, player_id):
-	if player_id == get_tree().get_network_unique_id():
-		pass
-	else:
-		get_node("../scene_handler/map/other_players/" + str(player_id)).attack_dict[spawn_time] = {"position": position, "rotdeg": rotation_deg, "rot": rotation}
+	if get_tree().get_rpc_sender_id() == 1:
+		if player_id == get_tree().get_network_unique_id():
+			pass
+		else:
+			get_node("../scene_handler/map/other_players/" + str(player_id)).attack_dict[spawn_time] = {"position": position, "rotdeg": rotation_deg, "rot": rotation}
 	
 # `rpc_id()` calls `remote func fetch_shipdata()` on id 1 (the server)
 func fetch_shipdata(ship_name, requester):
@@ -137,8 +144,9 @@ func fetch_shipdata(ship_name, requester):
 # `s_` identifies variables from server, `instance_from_id` references
 # the id of the initial caller from `fetch_shipdata`
 remote func return_shipdata(s_shipdata, requester):
-	# print("recieved data: " + str(s_shipdata))
-	instance_from_id(requester).setdata(s_shipdata)
+	if get_tree().get_rpc_sender_id() == 1:
+		# print("recieved data: " + str(s_shipdata))
+		instance_from_id(requester).setdata(s_shipdata)
 	
 func npc_hit(enemy_id, damage):
 	rpc_id(1, "send_npc_hit", enemy_id, damage)
@@ -147,8 +155,9 @@ func fetch_playerdata():
 	rpc_id(1, "fetch_playerdata", playeruser)
 
 remote func return_playerdata(data):
-	# print("recieved data " + str(data))
-	get_node("/root/scene_handler/map/gui/player_stats").load_playerdata(data)
+	if get_tree().get_rpc_sender_id() == 1:
+		# print("recieved data " + str(data))
+		get_node("/root/scene_handler/map/gui/player_stats").load_playerdata(data)
 	
 func write_playerdata_update(newdata):
 	rpc_id(1,"write_playerdata_update", playeruser, newdata)

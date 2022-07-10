@@ -2,19 +2,30 @@ extends KinematicBody2D
 
 export var enabled = true
 
+var rng = RandomNumberGenerator.new()
+
 onready var cam = get_node("cam2d")
 onready var intr_cast = get_node("player_body/body/frontarm/intr_cast")
+
 onready var frontarm = get_node("player_body/body/frontarm")
 onready var rightarm = get_node("player_body/body/rightarm")
+onready var armanim = get_node("player_body/rightarm_anim")
+
 onready var body = get_node("player_body/body")
+onready var anim = get_node("player_body/anim_player")
+onready var hitsfx = get_node("hitsfx")
+onready var walkingsfx = get_node("walkingsfx")
+
 onready var head = get_node("player_body/head")
 onready var helmet = get_node("player_body/head/helmet")
+
 onready var item = get_node("player_body/body/frontarm/held_item")
 onready var muzzle_flash = get_node("player_body/body/frontarm/muzzle_flash")
-onready var anim = get_node("player_body/anim_player")
-onready var armanim = get_node("player_body/rightarm_anim")
+onready var shootsfx = get_node("player_body/body/frontarm/pistol_shot")
 onready var proj_spawn = get_node("player_body/body/frontarm/proj_spawn")
 onready var bullet = preload("res://player/bullet.tscn")
+
+var picked_up
 
 const move_speed = 100
 var gravity = true
@@ -33,7 +44,7 @@ func _ready():
 	anim.play("idle_down")
 	set_physics_process(false)
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	current_time += delta
 	# control switching
 	if Input.is_action_just_released("action"):
@@ -52,6 +63,9 @@ func _physics_process(delta):
 		
 	if helmet.visible == true:
 		pass
+		
+	if picked_up != null:
+		picked_up.global_position = get_node("player_body/body/frontarm/pickup_area/pickup_col").global_position
 	
 	if gravity and enabled:
 		if Input.is_action_just_released("move_up"):
@@ -100,8 +114,13 @@ func _physics_process(delta):
 				rightarm.visible = true
 				frontarm.visible = false
 			walking = true
+			if walkingsfx.playing == false:
+				rng.randomize()
+				walkingsfx.pitch_scale = rng.randf_range(0.8, 1)
+				walkingsfx.play()
 		else:
 			walking = false
+			walkingsfx.stop()
 			
 	move_vec = move_vec.normalized()
 	move_and_collide(move_vec * move_speed * delta)
@@ -112,6 +131,9 @@ func _physics_process(delta):
 		rotate = true
 	else:
 		rotate = false
+		if picked_up != null:
+			picked_up.pickup()
+			picked_up = null
 	
 	if Input.is_action_just_released("lmb"):
 		if intr_cast.is_colliding():
@@ -121,6 +143,9 @@ func _physics_process(delta):
 			if rotate == true and current_time > update_delta:
 				server.send_attack(position, frontarm.rotation_degrees + 90, frontarm.rotation + PI/2)
 				muzzle_flash.emitting = true
+				rng.randomize()
+				shootsfx.pitch_scale = rng.randf_range(0.8, 1)
+				shootsfx.play()
 				var bullet_instance = bullet.instance()
 				bullet_instance.position = proj_spawn.global_position
 				bullet_instance.rotation_degrees = frontarm.rotation_degrees + 90
@@ -162,11 +187,19 @@ func _on_area2d_body_entered(body):
 		print("player in gravity")
 	if body.is_in_group("bullet"):
 		get_parent().get_node("gui/player_stats").playerhit(10)
+		rng.randomize()
+		hitsfx.pitch_scale = rng.randf_range(0.7, 1.1)
+		hitsfx.play()
+		
+func _on_pickup_area_body_entered(body):
+	if body.is_in_group("pickup_object"):
+		picked_up = body
+		picked_up.pickup()
 		
 func define_player_state():
 	# if we have differnt maps, a map_node must be included
 	player_state = {
-		"t": OS.get_system_time_msecs(), 
+		"t": OS.get_system_time_msecs(),
 		"p": get_global_position(),
 		"rot": head.global_rotation,
 		"armrot": frontarm.global_rotation,
@@ -175,3 +208,4 @@ func define_player_state():
 		"helmet": helmet.visible
 	}
 	server.send_player_state(player_state)
+

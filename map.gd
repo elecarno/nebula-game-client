@@ -2,7 +2,7 @@ extends Node2D
 
 var player_spawn = preload("res://player/player_template.tscn")
 var enemy_spawn = preload("res://enemies/enemy_template.tscn")
-var bullet_spawn = preload("res://player/bullet.tscn")
+var pickup_spawn = preload("res://pickups/crate.tscn")
 var last_world_state = 0 # is a timestamp, not an actual state
 
 # [previous past, most recent past, nearest future, further future]
@@ -29,9 +29,20 @@ func spawn_new_enemy(enemy_id, enemy_dict):
 	new_enemy.name = str(enemy_id)
 	get_node("enemies").add_child(new_enemy, true)
 	
+func spawn_new_pickup(pickup_id, pickup_dict):
+	var new_pickup = pickup_spawn.instance()
+	new_pickup.position = pickup_dict["pickup_position"]
+	new_pickup.type = pickup_dict["pickup_type"]
+	new_pickup.name = str(pickup_id)
+	get_node("pickups").add_child(new_pickup, true)
+
 func despawn_player(player_id):
 	yield(get_tree().create_timer(0.25), "timeout")
 	get_node("other_players/" + str(player_id)).queue_free()
+	
+func despawn_pickup(pickup_id):
+	yield(get_tree().create_timer(0.25), "timeout")
+	get_node("pickups/" + str(pickup_id)).queue_free()
 	
 func update_world_state(world_state):
 	if world_state["t"] > last_world_state:
@@ -50,6 +61,8 @@ func _physics_process(delta):
 				if str(player) == "t":
 					continue
 				if str(player) == "enemies":
+					continue
+				if str(player) == "pickups":
 					continue
 				if player == get_tree().get_network_unique_id():
 					continue
@@ -70,6 +83,15 @@ func _physics_process(delta):
 					get_node("enemies/" + str(enemy)).update_enemy(new_position, world_state_buffer[1]["enemies"][enemy])
 				else:
 					spawn_new_enemy(enemy, world_state_buffer[2]["enemies"][enemy])
+				
+			for pickup in world_state_buffer[2]["pickups"].keys():
+				if not world_state_buffer[1]["pickups"].has(pickup):
+					continue
+				if get_node("pickups").has_node(str(pickup)):
+					var new_position = lerp(world_state_buffer[1]["pickups"][pickup]["pickup_position"], world_state_buffer[2]["pickups"][pickup]["pickup_position"], interpolation_factor)
+					get_node("pickups/" + str(pickup)).update_pickup(new_position, world_state_buffer[1]["pickups"][pickup])
+				else:
+					spawn_new_pickup(pickup, world_state_buffer[2]["pickups"][pickup])
 			
 		elif render_time > world_state_buffer[1].t: # there is no future state and extrapolation must be used
 			var extrapolation_factor = float(render_time - world_state_buffer[0]["t"]) / float(world_state_buffer[1]["t"]) - 1.00 # minus one to exclude time between world states
@@ -77,6 +99,8 @@ func _physics_process(delta):
 				if str(player) == "t":
 					continue
 				if str(player) == "enemies":
+					continue
+				if str(player) == "pickups":
 					continue
 				if player == get_tree().get_network_unique_id():
 					continue
