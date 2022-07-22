@@ -280,7 +280,7 @@ texture = ExtResource( 11 )
 [node name="blocker" type="Polygon2D" parent="station/lounge"]
 z_index = 1
 color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
-polygon = PoolVector2Array( -117, -109, -117, 16, -230, 16, -230, -164, 161, -163, 232, -103, 232, 88, 116, 88, 116, -36, 43, -107 )
+polygon = PoolVector2Array( -117, -109, -117, 16, -230, 16, -230, -164, 161, -164, 232, -103, 232, 88, 116, 88, 116, -36, 43, -107 )
 
 [node name="line_light_blue" type="Light2D" parent="station/lounge"]
 position = Vector2( -80.5, -98 )

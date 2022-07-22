@@ -112,6 +112,9 @@ remote func return_token_verification_results(result):
 		
 func send_player_state(player_state):
 	rpc_unreliable_id(1, "recieve_player_state", player_state)
+	
+func send_pickup_state(pickup_state, pickup_id):
+	rpc_unreliable_id(1, "recieve_pickup_state", pickup_state, pickup_id)
 
 remote func recieve_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:

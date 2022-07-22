@@ -133,6 +133,7 @@ func _physics_process(delta):
 		rotate = false
 		if picked_up != null:
 			picked_up.pickup()
+			picked_up.picked_up = false
 			picked_up = null
 	
 	if Input.is_action_just_released("lmb"):
@@ -208,4 +209,3 @@ func define_player_state():
 		"helmet": helmet.visible
 	}
 	server.send_player_state(player_state)
-
