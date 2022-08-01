@@ -19,6 +19,9 @@ func update_display():
 	get_node("hp_bar").value = playerdata.stats.hp
 	get_node("helmet_visor").visible = playerdata.stats.helmet
 	get_parent().get_parent().get_node("player").helmet.visible = playerdata.stats.helmet
+	get_node("weapon_display").visible = playerdata.stats.armed
+	get_parent().get_parent().get_node("player").armed = playerdata.stats.armed
+	get_parent().get_parent().get_node("player").item.visible = playerdata.stats.armed
 	get_node("credits_label").text = str(playerdata.credits) + "c"
 
 func playerhit(damage):
@@ -33,6 +36,14 @@ func togglehelmet():
 		playerdata.stats.helmet = false
 	else:
 		playerdata.stats.helmet = true
+	server.write_playerdata_update(playerdata)
+	server.fetch_playerdata()
+	
+func togglearmed():
+	if playerdata.stats.armed == true:
+		playerdata.stats.armed = false
+	else:
+		playerdata.stats.armed = true
 	server.write_playerdata_update(playerdata)
 	server.fetch_playerdata()
 

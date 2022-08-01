@@ -33,6 +33,7 @@ func update_player(new_position, player_state):
 	frontarm.global_rotation = player_state["armrot"]
 	rightarm.visible = player_state["armvis"]
 	helmet.visible = player_state["helmet"]
+	item.visible = player_state["armed"]
 	
 	if player_state["anim"] == "idle_up" or player_state["anim"] == "walk_up":
 		configure_character(Vector2(1.5, -4.5), true, true)

@@ -38,6 +38,7 @@ var player_state
 var moving = false
 var walking = false
 var flip = false
+var armed = false
 var head_look_offset = 0
 
 func _ready():
@@ -60,6 +61,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("helmet_toggle"):
 		get_parent().get_node("gui/player_stats").togglehelmet()
+		
+	if Input.is_action_just_released("arm"):
+		get_parent().get_node("gui/player_stats").togglearmed()
 		
 	if helmet.visible == true:
 		pass
@@ -141,7 +145,7 @@ func _physics_process(delta):
 			var collider = intr_cast.get_collider()
 			collider._on_interact()
 		else:
-			if rotate == true and current_time > update_delta:
+			if rotate == true and current_time > update_delta and armed == true:
 				server.send_attack(position, frontarm.rotation_degrees + 90, frontarm.rotation + PI/2)
 				muzzle_flash.emitting = true
 				rng.randomize()
@@ -193,7 +197,7 @@ func _on_area2d_body_entered(body):
 		hitsfx.play()
 		
 func _on_pickup_area_body_entered(body):
-	if body.is_in_group("pickup_object"):
+	if body.is_in_group("pickup_object") and armed == false:
 		picked_up = body
 		picked_up.pickup()
 		
@@ -206,6 +210,7 @@ func define_player_state():
 		"armrot": frontarm.global_rotation,
 		"anim": anim.current_animation,
 		"armvis": rightarm.visible,
-		"helmet": helmet.visible
+		"helmet": helmet.visible,
+		"armed": armed
 	}
 	server.send_player_state(player_state)
