@@ -151,12 +151,19 @@ func _physics_process(delta):
 				rng.randomize()
 				shootsfx.pitch_scale = rng.randf_range(0.8, 1)
 				shootsfx.play()
+				var t = Timer.new()
+				t.set_wait_time(0.2)
+				t.set_one_shot(true)
+				self.add_child(t)
+				t.start()
+				yield(t, "timeout")
 				var bullet_instance = bullet.instance()
 				bullet_instance.position = proj_spawn.global_position
 				bullet_instance.rotation_degrees = frontarm.rotation_degrees + 90
 				bullet_instance.rotation_angle = frontarm.rotation + PI/2
 				get_parent().add_child(bullet_instance)
 				current_time = 0
+				t.queue_free()
 	
 	var look_vec = get_global_mouse_position() - frontarm.global_position
 	var direction = sign(get_global_mouse_position().x - frontarm.global_position.x)
