@@ -1,15 +1,42 @@
 extends StaticBody2D
 
-var door_obj
-var door_col
-var hover_sprite
+export var airlock = false
+export var outer_door = false
+var other_door
 
+onready var door_obj = get_parent().get_node("door_obj")
+onready var door_col = get_parent().get_node("door_obj/staticbody2d/door_col")
+onready var hover_sprite = get_parent().get_node("door_button/hover_sprite")
+	
 func _ready():
-	door_obj = get_parent().get_node("door_obj")
-	door_col = get_parent().get_node("door_obj/staticbody2d/door_col")
-	hover_sprite = get_parent().get_node("door_button/hover_sprite")
+	if airlock:
+		print("yes")
+		if get_parent().name == "door1":
+			other_door = get_parent().get_parent().get_node("door2")
+		if get_parent().name == "door2":
+			other_door = get_parent().get_parent().get_node("door1")
 	
 func _on_interact():
+	if outer_door:
+		if get_tree().get_root().get_node("scene_handler").get_node("map").get_node("player").get_node("player_body").get_node("head").get_node("helmet").visible == false:
+			get_tree().get_root().get_node("scene_handler").get_node("map").get_node("gui/player_stats").togglehelmet()
+	if airlock:
+		if other_door.get_node("door_obj").visible == false:
+			other_door.get_node("door_button").toggle_door()
+			var t = Timer.new()
+			t.set_wait_time(1)
+			t.set_one_shot(true)
+			self.add_child(t)
+			t.start()
+			yield(t, "timeout")
+			toggle_door()
+			t.queue_free()
+		else:
+			toggle_door()
+	else:
+		toggle_door()
+		
+func toggle_door():
 	if door_obj.visible:
 		door_obj.visible = false
 	else:

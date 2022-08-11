@@ -348,4 +348,3 @@ smoothing_speed = 10.0
 
 [connection signal="body_entered" from="area2d" to="." method="_on_area2d_body_entered"]
 [connection signal="body_entered" from="player_body/body/frontarm/pickup_area" to="." method="_on_pickup_area_body_entered"]
-[connection signal="body_exited" from="player_body/body/frontarm/pickup_area" to="." method="_on_pickup_area_body_exited"]

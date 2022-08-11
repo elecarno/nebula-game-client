@@ -1,20 +1,20 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://effects/bg_2.png" type="Texture" id=1]
 [ext_resource path="res://player/items/rifle.png" type="Texture" id=2]
 [ext_resource path="res://environment/auto_door_wide.tscn" type="PackedScene" id=3]
 [ext_resource path="res://map.gd" type="Script" id=4]
-[ext_resource path="res://environment/button_door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://environment/auto_door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/station_pieces_assets/command_center_floor.png" type="Texture" id=5]
+[ext_resource path="res://environment/station_pieces_assets/command_center_top.png" type="Texture" id=6]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/login_screen.gd" type="Script" id=8]
 [ext_resource path="res://ui/playerstats.gd" type="Script" id=9]
 [ext_resource path="res://effects/bg_2b2.png" type="Texture" id=10]
 [ext_resource path="res://effects/smoke_particle.png" type="Texture" id=11]
 [ext_resource path="res://ui/meters.png" type="Texture" id=12]
-[ext_resource path="res://environment/station_pieces/lounge_walls.png" type="Texture" id=13]
-[ext_resource path="res://environment/station_pieces/lounge_top.png" type="Texture" id=14]
-[ext_resource path="res://environment/station_pieces/lounge_floor.png" type="Texture" id=15]
+[ext_resource path="res://environment/station_pieces_assets/lounge_walls.png" type="Texture" id=13]
+[ext_resource path="res://environment/station_pieces_assets/lounge_top.png" type="Texture" id=14]
+[ext_resource path="res://environment/station_pieces_assets/lounge_floor.png" type="Texture" id=15]
 [ext_resource path="res://ui/ui_theme.tres" type="Theme" id=16]
 [ext_resource path="res://ui/oxygen_bar.png" type="Texture" id=17]
 [ext_resource path="res://ui/nitrogen_bar.png" type="Texture" id=18]
@@ -23,17 +23,29 @@
 [ext_resource path="res://ui/helmet_icon.png" type="Texture" id=21]
 [ext_resource path="res://effects/bg_1b.png" type="Texture" id=22]
 [ext_resource path="res://ui/pixeled_override.tres" type="DynamicFont" id=23]
-[ext_resource path="res://environment/station_pieces/horizontal_connector_walls.png" type="Texture" id=24]
-[ext_resource path="res://environment/station_pieces/horizontal_connector_top.png" type="Texture" id=25]
-[ext_resource path="res://environment/station_pieces/horizontal_connector_floor.png" type="Texture" id=26]
+[ext_resource path="res://environment/station_pieces_assets/horizontal_connector_walls.png" type="Texture" id=24]
+[ext_resource path="res://environment/station_pieces_assets/horizontal_connector_top.png" type="Texture" id=25]
+[ext_resource path="res://environment/station_pieces_assets/horizontal_connector_floor.png" type="Texture" id=26]
 [ext_resource path="res://effects/line_light_b.png" type="Texture" id=27]
-[ext_resource path="res://environment/station_pieces/vertical_connector_floor.png" type="Texture" id=28]
-[ext_resource path="res://environment/station_pieces/vertical_connector_walls.png" type="Texture" id=29]
-[ext_resource path="res://environment/station_pieces/vertical_connector_top.png" type="Texture" id=30]
-[ext_resource path="res://environment/station_pieces/storage_walls.png" type="Texture" id=31]
-[ext_resource path="res://environment/station_pieces/storage_floor.png" type="Texture" id=32]
-[ext_resource path="res://environment/station_pieces/storage_top.png" type="Texture" id=33]
+[ext_resource path="res://environment/station_pieces_assets/vertical_connector_floor.png" type="Texture" id=28]
+[ext_resource path="res://environment/station_pieces_assets/vertical_connector_walls.png" type="Texture" id=29]
+[ext_resource path="res://environment/station_pieces_assets/vertical_connector_top.png" type="Texture" id=30]
+[ext_resource path="res://environment/station_pieces_assets/storage_walls.png" type="Texture" id=31]
+[ext_resource path="res://environment/station_pieces_assets/storage_floor.png" type="Texture" id=32]
+[ext_resource path="res://environment/station_pieces_assets/storage_top.png" type="Texture" id=33]
 [ext_resource path="res://environment/auto_door_wide_v.tscn" type="PackedScene" id=34]
+[ext_resource path="res://environment/station_pieces_assets/turn_connector_top.png" type="Texture" id=35]
+[ext_resource path="res://environment/station_pieces_assets/turn_connector_walls.png" type="Texture" id=36]
+[ext_resource path="res://environment/station_pieces_assets/turn_connector_floor.png" type="Texture" id=37]
+[ext_resource path="res://environment/env_scripts/station_module.gd" type="Script" id=38]
+[ext_resource path="res://environment/station_pieces_assets/command_center_walls.png" type="Texture" id=39]
+[ext_resource path="res://environment/station_pieces_assets/turn_connector_2_floor.png" type="Texture" id=40]
+[ext_resource path="res://environment/station_pieces_assets/turn_connector_2_walls.png" type="Texture" id=41]
+[ext_resource path="res://environment/station_pieces_assets/turn_connector_2_top.png" type="Texture" id=42]
+[ext_resource path="res://environment/station_pieces_assets/dock_walls.png" type="Texture" id=43]
+[ext_resource path="res://environment/station_pieces_assets/dock_floor.png" type="Texture" id=44]
+[ext_resource path="res://environment/station_pieces_assets/dock_top.png" type="Texture" id=45]
+[ext_resource path="res://environment/dock_airlock_doors_upper.tscn" type="PackedScene" id=46]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 7, 21 )
@@ -89,6 +101,27 @@ scale_random = 0.3
 hue_variation = -0.04
 hue_variation_random = 0.35
 
+[sub_resource type="RectangleShape2D" id=43]
+extents = Vector2( 56, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=44]
+extents = Vector2( 22, 4.25 )
+
+[sub_resource type="RectangleShape2D" id=45]
+extents = Vector2( 14.5, 45.5 )
+
+[sub_resource type="RectangleShape2D" id=46]
+extents = Vector2( 4, 12 )
+
+[sub_resource type="RectangleShape2D" id=47]
+extents = Vector2( 4, 20 )
+
+[sub_resource type="OccluderPolygon2D" id=48]
+polygon = PoolVector2Array( -65, -73, 48, -73, 119, -1, 119, 23, 111, 23, 111, 7, 39, -65, 34, -65, 34, -64, -52, -64, -52, -65, -57, -65, -129, 7, -129, 23, -137, 23, -137, -1 )
+
+[sub_resource type="OccluderPolygon2D" id=49]
+polygon = PoolVector2Array( -65, -73, 48, -73, 119, -1, 119, 39.0005, 111, 39.0005, 111, 7, 39.0003, -64.9998, -57, -65, -129, 7, -129, 38.9994, -137, 38.9994, -137, -1 )
+
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 80, 5.5 )
 
@@ -119,6 +152,30 @@ polygon = PoolVector2Array( -40, -104, -32, -104, -32, 88, -40, 88 )
 [sub_resource type="OccluderPolygon2D" id=30]
 polygon = PoolVector2Array( 32, -168, 40, -168, 40, 24, 32, 24 )
 
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 4, 48 )
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 4, 16 )
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 4, 12 )
+
+[sub_resource type="OccluderPolygon2D" id=41]
+polygon = PoolVector2Array( -40, -56, -32, -56, -32, 15.9848, 40, 16, 40, 24, -40, 24 )
+
+[sub_resource type="OccluderPolygon2D" id=42]
+polygon = PoolVector2Array( 32, -120, 40, -120, 40, -104, 32, -104 )
+
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 4, 16 )
+
+[sub_resource type="RectangleShape2D" id=51]
+extents = Vector2( 36, 5.5 )
+
+[sub_resource type="OccluderPolygon2D" id=52]
+polygon = PoolVector2Array( 32, -120, 40, -120, 40, -104, 32, -104 )
+
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 120, 5.5 )
 
@@ -136,6 +193,60 @@ extents = Vector2( 4, 28 )
 
 [sub_resource type="OccluderPolygon2D" id=25]
 polygon = PoolVector2Array( -120, -48, 120, -48, 120, -40, 120, 16, 112, 16, 112, -40, -112, -40, -112, 16, -120, 16, -120, -39 )
+
+[sub_resource type="RectangleShape2D" id=53]
+extents = Vector2( 50.5, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 2, 22 )
+
+[sub_resource type="RectangleShape2D" id=56]
+extents = Vector2( 4.5, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=57]
+extents = Vector2( 3.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 4.5, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=55]
+extents = Vector2( 5.5, 3 )
+
+[sub_resource type="RectangleShape2D" id=59]
+extents = Vector2( 2, 24.5 )
+
+[sub_resource type="RectangleShape2D" id=60]
+extents = Vector2( 2, 24 )
+
+[sub_resource type="RectangleShape2D" id=61]
+extents = Vector2( 2, 29.5 )
+
+[sub_resource type="OccluderPolygon2D" id=62]
+polygon = PoolVector2Array( -120, -48, -23, -48, -23, -92, 11, -92, 11, -39, 7, -39, -19, -39, -19, -43, 7, -43, 7, -88, -19, -88, -19, -39, -23, -39, -23, -40, -120, -40 )
+
+[sub_resource type="OccluderPolygon2D" id=63]
+polygon = PoolVector2Array( 18.9999, -32, 18.9998, -76, -7.00018, -76, -7.00006, -29, 18.9999, -29, 19, -24, -7.00005, -24, -11, -24, -11.0002, -76, -11.0002, -80, 18.9998, -80, 22.9998, -80.0001, 22.9999, -32.0001, 120, -32.0003, 120, -24.0003, 19, -24 )
+
+[sub_resource type="RectangleShape2D" id=64]
+extents = Vector2( 45.0001, 5.5 )
+
+[sub_resource type="RectangleShape2D" id=65]
+extents = Vector2( 45.0001, 5.5 )
+
+[sub_resource type="OccluderPolygon2D" id=66]
+polygon = PoolVector2Array( -109, -48, -23, -48, -23, -92, 11, -92, 11, -39, 7, -39, -19, -39, -19, -43, 7, -43, 7, -88, -19, -88, -19, -39, -23, -39, -23, -40, -109, -40 )
+
+[sub_resource type="OccluderPolygon2D" id=67]
+polygon = PoolVector2Array( 18.9999, -32, 18.9998, -76, -7.00018, -76, -7.00006, -29, 18.9999, -29, 19, -24, -7.00005, -24, -11, -24, -11.0002, -76, -11.0002, -80, 18.9998, -80, 22.9998, -80.0001, 22.9999, -32.0001, 109, -32.0003, 109, -24.0003, 19, -24 )
+
+[sub_resource type="RectangleShape2D" id=68]
+extents = Vector2( 8, 4 )
+
+[sub_resource type="RectangleShape2D" id=69]
+extents = Vector2( 8, 4 )
+
+[sub_resource type="RectangleShape2D" id=70]
+extents = Vector2( 4, 26 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.0590717, 1 )
@@ -197,15 +308,8 @@ texture = ExtResource( 10 )
 position = Vector2( -604, -9 )
 sort_enabled = false
 
-[node name="button_door" parent="station" instance=ExtResource( 5 )]
-position = Vector2( 142, -6 )
-z_index = 1
-
-[node name="auto_door" parent="station" instance=ExtResource( 6 )]
-position = Vector2( 142, 12 )
-z_index = 1
-
 [node name="lounge" type="Node2D" parent="station"]
+script = ExtResource( 38 )
 
 [node name="area" type="StaticBody2D" parent="station/lounge"]
 
@@ -284,22 +388,28 @@ position = Vector2( -32, -91 )
 z_index = 3
 shape = SubResource( 20 )
 
-[node name="top" type="Sprite" parent="station/lounge"]
+[node name="sprites" type="Node2D" parent="station/lounge"]
+
+[node name="top" type="Sprite" parent="station/lounge/sprites"]
 z_index = 2
 texture = ExtResource( 14 )
 
-[node name="floor" type="Sprite" parent="station/lounge"]
+[node name="floor" type="Sprite" parent="station/lounge/sprites"]
 z_index = -1
 texture = ExtResource( 15 )
 
-[node name="walls" type="Sprite" parent="station/lounge"]
+[node name="walls" type="Sprite" parent="station/lounge/sprites"]
 z_index = -1
 texture = ExtResource( 13 )
 
-[node name="auto_door_wide" parent="station/lounge" instance=ExtResource( 3 )]
+[node name="interactables" type="Node2D" parent="station/lounge"]
+
+[node name="auto_door_wide" parent="station/lounge/interactables" instance=ExtResource( 3 )]
 position = Vector2( -48, 32.5 )
 
-[node name="steam" type="Particles2D" parent="station/lounge"]
+[node name="effects" type="Node2D" parent="station/lounge"]
+
+[node name="steam" type="Particles2D" parent="station/lounge/effects"]
 position = Vector2( 0, -84 )
 amount = 20
 lifetime = 20.0
@@ -307,7 +417,7 @@ preprocess = 40.0
 process_material = SubResource( 16 )
 texture = ExtResource( 11 )
 
-[node name="steam2" type="Particles2D" parent="station/lounge"]
+[node name="steam2" type="Particles2D" parent="station/lounge/effects"]
 position = Vector2( -96, -84 )
 amount = 20
 lifetime = 20.0
@@ -315,12 +425,7 @@ preprocess = 40.0
 process_material = SubResource( 16 )
 texture = ExtResource( 11 )
 
-[node name="blocker" type="Polygon2D" parent="station/lounge"]
-z_index = -2
-color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
-polygon = PoolVector2Array( -117, -109, -117, 16, -230, 16, -230, -164, 161, -164, 232, -103, 232, 88, 116, 88, 116, -36, 43, -107 )
-
-[node name="line_light_blue" type="Light2D" parent="station/lounge"]
+[node name="line_light_blue" type="Light2D" parent="station/lounge/effects"]
 position = Vector2( -80.5, -98 )
 texture = ExtResource( 27 )
 texture_scale = 0.3
@@ -329,7 +434,7 @@ shadow_enabled = true
 shadow_filter = 2
 shadow_filter_smooth = 30.0
 
-[node name="line_light_blue2" type="Light2D" parent="station/lounge"]
+[node name="line_light_blue2" type="Light2D" parent="station/lounge/effects"]
 position = Vector2( -16.5, -98 )
 texture = ExtResource( 27 )
 texture_scale = 0.3
@@ -338,44 +443,278 @@ shadow_enabled = true
 shadow_filter = 2
 shadow_filter_smooth = 30.0
 
+[node name="blocker" type="Polygon2D" parent="station/lounge"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -117, -109, -117, 16, -230, 16, -230, -164, 161, -164, 232, -103, 232, 88, 116, 88, 116, -36, 43, -107 )
+
+[node name="command_center" type="Node2D" parent="station"]
+position = Vector2( 431, -95 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/command_center"]
+
+[node name="col_dia_2" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 87, -95 )
+rotation = 0.785398
+z_index = 3
+shape = SubResource( 9 )
+
+[node name="col_dia_3" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( -87, -95 )
+rotation = 2.35619
+z_index = 3
+shape = SubResource( 9 )
+
+[node name="col_dia_4" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( -87, 79 )
+rotation = 0.785397
+z_index = 3
+shape = SubResource( 9 )
+
+[node name="col_dia_5" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 87, 79 )
+rotation = -0.785397
+z_index = 3
+shape = SubResource( 9 )
+
+[node name="col_top" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 0, -130.5 )
+z_index = 3
+shape = SubResource( 43 )
+
+[node name="col_bottom" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( -34, 116.25 )
+z_index = 3
+shape = SubResource( 44 )
+
+[node name="col_bottom2" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 34, 116 )
+z_index = 3
+shape = SubResource( 44 )
+
+[node name="col_mid" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( -27.5, -4.5 )
+z_index = 3
+shape = SubResource( 45 )
+
+[node name="col_mid2" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 27, -4 )
+z_index = 3
+shape = SubResource( 45 )
+
+[node name="col_side" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( -124, -52 )
+z_index = 3
+shape = SubResource( 46 )
+
+[node name="col_side2" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 124, -52 )
+z_index = 3
+shape = SubResource( 46 )
+
+[node name="col_side3" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( 124, 28 )
+z_index = 3
+shape = SubResource( 47 )
+
+[node name="col_side4" type="CollisionShape2D" parent="station/command_center/area"]
+position = Vector2( -124, 28 )
+z_index = 3
+shape = SubResource( 47 )
+
+[node name="light_occ_top" type="LightOccluder2D" parent="station/command_center/area"]
+position = Vector2( 9, -63 )
+z_index = 3
+occluder = SubResource( 48 )
+
+[node name="light_occ_bottom" type="LightOccluder2D" parent="station/command_center/area"]
+position = Vector2( -9, 47 )
+rotation = 3.14159
+z_index = 3
+occluder = SubResource( 49 )
+
+[node name="sprites" type="Node2D" parent="station/command_center"]
+
+[node name="top" type="Sprite" parent="station/command_center/sprites"]
+z_index = 2
+texture = ExtResource( 6 )
+
+[node name="walls" type="Sprite" parent="station/command_center/sprites"]
+z_index = -1
+texture = ExtResource( 39 )
+
+[node name="floor" type="Sprite" parent="station/command_center/sprites"]
+z_index = -1
+texture = ExtResource( 5 )
+
+[node name="interactables" type="Node2D" parent="station/command_center"]
+
+[node name="auto_door_wide" parent="station/command_center/interactables" instance=ExtResource( 3 )]
+position = Vector2( 0, 128.5 )
+
+[node name="auto_door_wide_v" parent="station/command_center/interactables" instance=ExtResource( 34 )]
+position = Vector2( -124, -16 )
+
+[node name="auto_door_wide_v2" parent="station/command_center/interactables" instance=ExtResource( 34 )]
+position = Vector2( 124, -16 )
+
+[node name="effects" type="Node2D" parent="station/command_center"]
+
+[node name="line_light_blue" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( -40, -108.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.3
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue3" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( -104, -6 )
+rotation = 1.57079
+scale = Vector2( -6.11622, 3.27031 )
+texture = ExtResource( 27 )
+texture_scale = 0.3
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue4" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( 105, -3 )
+rotation = 1.57079
+scale = Vector2( -6.11622, 3.27031 )
+texture = ExtResource( 27 )
+texture_scale = 0.3
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue2" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( 40, -109.5 )
+scale = Vector2( 1.06, 1.06 )
+texture = ExtResource( 27 )
+texture_scale = 0.3
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( -15, 132.5 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red2" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( 15, 132.5 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red3" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( 27, -52.5 )
+scale = Vector2( 1.2574, 0.277744 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red5" type="Light2D" parent="station/command_center/effects"]
+rotation = 1.57079
+scale = Vector2( 3.93316, 5.68284 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red4" type="Light2D" parent="station/command_center/effects"]
+position = Vector2( -28, -52.5 )
+scale = Vector2( 1.2574, 0.277744 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="steam" type="Particles2D" parent="station/command_center/effects"]
+position = Vector2( -54, -46 )
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="steam2" type="Particles2D" parent="station/command_center/effects"]
+position = Vector2( 55, -46 )
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="steam3" type="Particles2D" parent="station/command_center/effects"]
+position = Vector2( 55, 49 )
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="steam4" type="Particles2D" parent="station/command_center/effects"]
+position = Vector2( -54, 49 )
+amount = 20
+lifetime = 20.0
+preprocess = 40.0
+process_material = SubResource( 16 )
+texture = ExtResource( 11 )
+
+[node name="blocker" type="Polygon2D" parent="station/command_center"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -117, -109, -117, 16, -230, 16, -230, -164, 161, -164, 232, -103, 232, 88, 116, 88, 116, -36, 43, -107 )
+
 [node name="h_connector" type="Node2D" parent="station"]
-position = Vector2( 200, 136 )
-
-[node name="line_light_blue3" type="Light2D" parent="station/h_connector"]
-position = Vector2( -72, -21.5 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue4" type="Light2D" parent="station/h_connector"]
-position = Vector2( -40, -21.5 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue5" type="Light2D" parent="station/h_connector"]
-position = Vector2( 40, -21.5 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue6" type="Light2D" parent="station/h_connector"]
-position = Vector2( 72, -21.5 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
+position = Vector2( 71, 256 )
+script = ExtResource( 38 )
 
 [node name="area" type="StaticBody2D" parent="station/h_connector"]
 
@@ -418,19 +757,61 @@ position = Vector2( 0, 64 )
 z_index = 3
 occluder = SubResource( 37 )
 
-[node name="top" type="Sprite" parent="station/h_connector"]
+[node name="sprites" type="Node2D" parent="station/h_connector"]
+
+[node name="top" type="Sprite" parent="station/h_connector/sprites"]
 z_index = 2
 texture = ExtResource( 25 )
 
-[node name="floor" type="Sprite" parent="station/h_connector"]
+[node name="floor" type="Sprite" parent="station/h_connector/sprites"]
 z_index = -1
 texture = ExtResource( 26 )
 
-[node name="walls" type="Sprite" parent="station/h_connector"]
+[node name="walls" type="Sprite" parent="station/h_connector/sprites"]
 z_index = -1
 texture = ExtResource( 24 )
 
-[node name="steam" type="Particles2D" parent="station/h_connector"]
+[node name="interactables" type="Node2D" parent="station/h_connector"]
+
+[node name="effects" type="Node2D" parent="station/h_connector"]
+
+[node name="line_light_blue3" type="Light2D" parent="station/h_connector/effects"]
+position = Vector2( -72, -21.5 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue4" type="Light2D" parent="station/h_connector/effects"]
+position = Vector2( -40, -21.5 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue5" type="Light2D" parent="station/h_connector/effects"]
+position = Vector2( 40, -21.5 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue6" type="Light2D" parent="station/h_connector/effects"]
+position = Vector2( 72, -21.5 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="steam" type="Particles2D" parent="station/h_connector/effects"]
 position = Vector2( 56, -35 )
 rotation = 3.14159
 amount = 20
@@ -439,7 +820,7 @@ preprocess = 40.0
 process_material = SubResource( 16 )
 texture = ExtResource( 11 )
 
-[node name="steam2" type="Particles2D" parent="station/h_connector"]
+[node name="steam2" type="Particles2D" parent="station/h_connector/effects"]
 position = Vector2( -56, -34 )
 rotation = -2.87979
 amount = 20
@@ -449,92 +830,14 @@ process_material = SubResource( 16 )
 texture = ExtResource( 11 )
 
 [node name="blocker" type="Polygon2D" parent="station/h_connector"]
+visible = false
 z_index = -2
 color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 polygon = PoolVector2Array( -80, -47, 80, -47, 80, -138, -80, -138 )
 
 [node name="v_connector" type="Node2D" parent="station"]
-position = Vector2( -49, 128 )
-
-[node name="line_light_blue3" type="Light2D" parent="station/v_connector"]
-position = Vector2( -29.5, -80 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue4" type="Light2D" parent="station/v_connector"]
-position = Vector2( -29.5, -48 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue5" type="Light2D" parent="station/v_connector"]
-position = Vector2( -29.5, 47 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue6" type="Light2D" parent="station/v_connector"]
-position = Vector2( -29.5, 79 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue7" type="Light2D" parent="station/v_connector"]
-position = Vector2( 29.5, -80 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue8" type="Light2D" parent="station/v_connector"]
-position = Vector2( 29.5, -48 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue9" type="Light2D" parent="station/v_connector"]
-position = Vector2( 29.5, 47 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_blue10" type="Light2D" parent="station/v_connector"]
-position = Vector2( 29.5, 79 )
-rotation = 1.57079
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.658824, 0.992157, 1, 1 )
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
+position = Vector2( -18, 132 )
+script = ExtResource( 38 )
 
 [node name="area" type="StaticBody2D" parent="station/v_connector"]
 
@@ -577,104 +880,642 @@ position = Vector2( 0, 64 )
 z_index = 3
 occluder = SubResource( 30 )
 
-[node name="top" type="Sprite" parent="station/v_connector"]
+[node name="sprites" type="Node2D" parent="station/v_connector"]
+
+[node name="top" type="Sprite" parent="station/v_connector/sprites"]
 position = Vector2( 0, -8 )
 z_index = 2
 texture = ExtResource( 30 )
 
-[node name="floor" type="Sprite" parent="station/v_connector"]
+[node name="floor" type="Sprite" parent="station/v_connector/sprites"]
 position = Vector2( 0, -8 )
 z_index = -1
 texture = ExtResource( 28 )
 
-[node name="walls" type="Sprite" parent="station/v_connector"]
+[node name="walls" type="Sprite" parent="station/v_connector/sprites"]
 position = Vector2( 0, -8 )
 z_index = -1
 texture = ExtResource( 29 )
 
+[node name="interactables" type="Node2D" parent="station/v_connector"]
+
+[node name="effects" type="Node2D" parent="station/v_connector"]
+
+[node name="line_light_blue3" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( -29.5, -80 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue4" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( -29.5, -48 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue5" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( -29.5, 47 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue6" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( -29.5, 79 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue7" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( 29.5, -80 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue8" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( 29.5, -48 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue9" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( 29.5, 47 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue10" type="Light2D" parent="station/v_connector/effects"]
+position = Vector2( 29.5, 79 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="blocker" type="Polygon2D" parent="station/v_connector"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -137, 88, 150, 88, 149, -104, -137, -104 )
+
+[node name="v_connector2" type="Node2D" parent="station"]
+position = Vector2( 431, 128 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/v_connector2"]
+
+[node name="col_left" type="CollisionShape2D" parent="station/v_connector2/area"]
+position = Vector2( -36, -8 )
+z_index = 3
+shape = SubResource( 27 )
+
+[node name="col_right" type="CollisionShape2D" parent="station/v_connector2/area"]
+position = Vector2( 36, -8 )
+z_index = 3
+shape = SubResource( 27 )
+
+[node name="col_detail" type="CollisionShape2D" parent="station/v_connector2/area"]
+position = Vector2( -29, 59 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="col_detail2" type="CollisionShape2D" parent="station/v_connector2/area"]
+position = Vector2( 29, 59 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="col_detail3" type="CollisionShape2D" parent="station/v_connector2/area"]
+position = Vector2( -29, -59 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="col_detail4" type="CollisionShape2D" parent="station/v_connector2/area"]
+position = Vector2( 29, -59 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/v_connector2/area"]
+z_index = 3
+occluder = SubResource( 29 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/v_connector2/area"]
+position = Vector2( 0, 64 )
+z_index = 3
+occluder = SubResource( 30 )
+
+[node name="sprites" type="Node2D" parent="station/v_connector2"]
+
+[node name="top" type="Sprite" parent="station/v_connector2/sprites"]
+position = Vector2( 0, -8 )
+z_index = 2
+texture = ExtResource( 30 )
+
+[node name="floor" type="Sprite" parent="station/v_connector2/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 28 )
+
+[node name="walls" type="Sprite" parent="station/v_connector2/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 29 )
+
+[node name="interactables" type="Node2D" parent="station/v_connector2"]
+
+[node name="effects" type="Node2D" parent="station/v_connector2"]
+
+[node name="line_light_blue3" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( -29.5, -80 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue4" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( -29.5, -48 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue5" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( -29.5, 47 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue6" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( -29.5, 79 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue7" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( 29.5, -80 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue8" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( 29.5, -48 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue9" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( 29.5, 47 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue10" type="Light2D" parent="station/v_connector2/effects"]
+position = Vector2( 29.5, 79 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="blocker" type="Polygon2D" parent="station/v_connector2"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -137, 88, 150, 88, 149, -104, -137, -104 )
+
+[node name="turn_connector_br" type="Node2D" parent="station"]
+position = Vector2( -49, 256 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/turn_connector_br"]
+
+[node name="col_left" type="CollisionShape2D" parent="station/turn_connector_br/area"]
+position = Vector2( -36, -8 )
+z_index = 3
+shape = SubResource( 38 )
+
+[node name="col_right" type="CollisionShape2D" parent="station/turn_connector_br/area"]
+position = Vector2( 36, -40 )
+z_index = 3
+shape = SubResource( 39 )
+
+[node name="col_right2" type="CollisionShape2D" parent="station/turn_connector_br/area"]
+position = Vector2( 36, 28 )
+z_index = 3
+shape = SubResource( 40 )
+
+[node name="col_bottom3" type="CollisionShape2D" parent="station/turn_connector_br/area"]
+position = Vector2( -1, 42 )
+z_index = 3
+shape = SubResource( 24 )
+
+[node name="col_detail3" type="CollisionShape2D" parent="station/turn_connector_br/area"]
+position = Vector2( -29, -1 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/turn_connector_br/area"]
+z_index = 3
+occluder = SubResource( 41 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/turn_connector_br/area"]
+position = Vector2( 0, 64 )
+z_index = 3
+occluder = SubResource( 42 )
+
+[node name="sprites" type="Node2D" parent="station/turn_connector_br"]
+
+[node name="top" type="Sprite" parent="station/turn_connector_br/sprites"]
+position = Vector2( 0, -8 )
+z_index = 2
+texture = ExtResource( 35 )
+
+[node name="walls" type="Sprite" parent="station/turn_connector_br/sprites"]
+position = Vector2( 0, -8 )
+z_index = 1
+texture = ExtResource( 36 )
+
+[node name="floor" type="Sprite" parent="station/turn_connector_br/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 37 )
+
+[node name="interactables" type="Node2D" parent="station/turn_connector_br"]
+
+[node name="effects" type="Node2D" parent="station/turn_connector_br"]
+
+[node name="line_light_blue3" type="Light2D" parent="station/turn_connector_br/effects"]
+position = Vector2( -29.5, -22 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue4" type="Light2D" parent="station/turn_connector_br/effects"]
+position = Vector2( -29.5, 10 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="blocker" type="Polygon2D" parent="station/turn_connector_br"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -137, 88, 150, 88, 149, -104, -137, -104 )
+
+[node name="turn_connector_bl" type="Node2D" parent="station"]
+position = Vector2( 431, 256 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/turn_connector_bl"]
+scale = Vector2( -1, 1 )
+
+[node name="col_left" type="CollisionShape2D" parent="station/turn_connector_bl/area"]
+position = Vector2( -36, -8 )
+z_index = 3
+shape = SubResource( 38 )
+
+[node name="col_right" type="CollisionShape2D" parent="station/turn_connector_bl/area"]
+position = Vector2( 36, -40 )
+z_index = 3
+shape = SubResource( 39 )
+
+[node name="col_right2" type="CollisionShape2D" parent="station/turn_connector_bl/area"]
+position = Vector2( 36, 28 )
+z_index = 3
+shape = SubResource( 40 )
+
+[node name="col_bottom3" type="CollisionShape2D" parent="station/turn_connector_bl/area"]
+position = Vector2( -1, 42 )
+z_index = 3
+shape = SubResource( 24 )
+
+[node name="col_detail3" type="CollisionShape2D" parent="station/turn_connector_bl/area"]
+position = Vector2( -29, -1 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/turn_connector_bl/area"]
+z_index = 3
+occluder = SubResource( 41 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/turn_connector_bl/area"]
+position = Vector2( 0, 64 )
+z_index = 3
+occluder = SubResource( 42 )
+
+[node name="sprites" type="Node2D" parent="station/turn_connector_bl"]
+
+[node name="top" type="Sprite" parent="station/turn_connector_bl/sprites"]
+position = Vector2( 0, -8 )
+z_index = 2
+texture = ExtResource( 35 )
+flip_h = true
+
+[node name="walls" type="Sprite" parent="station/turn_connector_bl/sprites"]
+position = Vector2( 0, -8 )
+z_index = 1
+texture = ExtResource( 36 )
+flip_h = true
+
+[node name="floor" type="Sprite" parent="station/turn_connector_bl/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 37 )
+flip_h = true
+
+[node name="interactables" type="Node2D" parent="station/turn_connector_bl"]
+
+[node name="effects" type="Node2D" parent="station/turn_connector_bl"]
+scale = Vector2( -1, 1 )
+
+[node name="line_light_blue3" type="Light2D" parent="station/turn_connector_bl/effects"]
+position = Vector2( -29.5, -22 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue4" type="Light2D" parent="station/turn_connector_bl/effects"]
+position = Vector2( -29.5, 10 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="blocker" type="Polygon2D" parent="station/turn_connector_bl"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -137, 88, 150, 88, 149, -104, -137, -104 )
+
+[node name="turn_connector_tr" type="Node2D" parent="station"]
+position = Vector2( 135, -228 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/turn_connector_tr"]
+
+[node name="col_left" type="CollisionShape2D" parent="station/turn_connector_tr/area"]
+position = Vector2( -36, -8 )
+z_index = 3
+shape = SubResource( 38 )
+
+[node name="col_right2" type="CollisionShape2D" parent="station/turn_connector_tr/area"]
+position = Vector2( 36, 24 )
+z_index = 3
+shape = SubResource( 50 )
+
+[node name="col_top" type="CollisionShape2D" parent="station/turn_connector_tr/area"]
+position = Vector2( 4, -50.5 )
+z_index = 3
+shape = SubResource( 51 )
+
+[node name="col_detail3" type="CollisionShape2D" parent="station/turn_connector_tr/area"]
+position = Vector2( -29, 2 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/turn_connector_tr/area"]
+position = Vector2( 0, -32 )
+scale = Vector2( 1, -1 )
+z_index = 3
+occluder = SubResource( 41 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/turn_connector_tr/area"]
+position = Vector2( 0, 128 )
+z_index = 3
+occluder = SubResource( 52 )
+
+[node name="sprites" type="Node2D" parent="station/turn_connector_tr"]
+
+[node name="top" type="Sprite" parent="station/turn_connector_tr/sprites"]
+position = Vector2( 0, -8 )
+z_index = 2
+texture = ExtResource( 42 )
+
+[node name="walls" type="Sprite" parent="station/turn_connector_tr/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 41 )
+
+[node name="floor" type="Sprite" parent="station/turn_connector_tr/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 40 )
+
+[node name="interactables" type="Node2D" parent="station/turn_connector_tr"]
+
+[node name="effects" type="Node2D" parent="station/turn_connector_tr"]
+
+[node name="line_light_blue3" type="Light2D" parent="station/turn_connector_tr/effects"]
+position = Vector2( -29.5, -19 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue4" type="Light2D" parent="station/turn_connector_tr/effects"]
+position = Vector2( -29.5, 13 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="blocker" type="Polygon2D" parent="station/turn_connector_tr"]
+visible = false
+z_index = -2
+color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+polygon = PoolVector2Array( -137, 88, 150, 88, 149, -104, -137, -104 )
+
+[node name="turn_connector_tl" type="Node2D" parent="station"]
+position = Vector2( 215, -228 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/turn_connector_tl"]
+scale = Vector2( -1, 1 )
+
+[node name="col_left" type="CollisionShape2D" parent="station/turn_connector_tl/area"]
+position = Vector2( -36, -8 )
+z_index = 3
+shape = SubResource( 38 )
+
+[node name="col_right2" type="CollisionShape2D" parent="station/turn_connector_tl/area"]
+position = Vector2( 36, 24 )
+z_index = 3
+shape = SubResource( 50 )
+
+[node name="col_top" type="CollisionShape2D" parent="station/turn_connector_tl/area"]
+position = Vector2( 4, -50.5 )
+z_index = 3
+shape = SubResource( 51 )
+
+[node name="col_detail3" type="CollisionShape2D" parent="station/turn_connector_tl/area"]
+position = Vector2( -29, 2 )
+z_index = 3
+shape = SubResource( 28 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/turn_connector_tl/area"]
+position = Vector2( 0, -32 )
+scale = Vector2( 1, -1 )
+z_index = 3
+occluder = SubResource( 41 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/turn_connector_tl/area"]
+position = Vector2( 0, 128 )
+z_index = 3
+occluder = SubResource( 52 )
+
+[node name="sprites" type="Node2D" parent="station/turn_connector_tl"]
+scale = Vector2( -1, 1 )
+
+[node name="top" type="Sprite" parent="station/turn_connector_tl/sprites"]
+position = Vector2( 0, -8 )
+z_index = 2
+texture = ExtResource( 42 )
+
+[node name="walls" type="Sprite" parent="station/turn_connector_tl/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 41 )
+
+[node name="floor" type="Sprite" parent="station/turn_connector_tl/sprites"]
+position = Vector2( 0, -8 )
+z_index = -1
+texture = ExtResource( 40 )
+
+[node name="interactables" type="Node2D" parent="station/turn_connector_tl"]
+
+[node name="effects" type="Node2D" parent="station/turn_connector_tl"]
+scale = Vector2( -1, 1 )
+
+[node name="line_light_blue3" type="Light2D" parent="station/turn_connector_tl/effects"]
+position = Vector2( -29.5, -19 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_blue4" type="Light2D" parent="station/turn_connector_tl/effects"]
+position = Vector2( -29.5, 13 )
+rotation = 1.57079
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="blocker" type="Polygon2D" parent="station/turn_connector_tl"]
+visible = false
 z_index = -2
 color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 polygon = PoolVector2Array( -137, 88, 150, 88, 149, -104, -137, -104 )
 
 [node name="storage" type="Node2D" parent="station"]
-position = Vector2( 400, 132 )
-
-[node name="line_light_red" type="Light2D" parent="station/storage"]
-position = Vector2( -82, -13 )
-scale = Vector2( 0.192788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.82
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_red2" type="Light2D" parent="station/storage"]
-position = Vector2( 0, -13 )
-scale = Vector2( 0.192788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.82
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_red3" type="Light2D" parent="station/storage"]
-position = Vector2( 83, -13 )
-scale = Vector2( 0.192788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.82
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_red4" type="Light2D" parent="station/storage"]
-position = Vector2( -82, 16 )
-scale = Vector2( 0.192788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.82
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_red5" type="Light2D" parent="station/storage"]
-position = Vector2( 0, 16 )
-scale = Vector2( 0.192788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.82
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_red6" type="Light2D" parent="station/storage"]
-position = Vector2( 83, 16 )
-scale = Vector2( 0.192788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 0.5
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.82
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
-
-[node name="line_light_red7" type="Light2D" parent="station/storage"]
-scale = Vector2( 0.712788, 0.192788 )
-texture = ExtResource( 27 )
-texture_scale = 4.33
-color = Color( 0.796078, 0, 0, 1 )
-energy = 1.49
-shadow_enabled = true
-shadow_filter = 2
-shadow_filter_smooth = 30.0
+position = Vector2( 271, 252 )
+script = ExtResource( 38 )
 
 [node name="area" type="StaticBody2D" parent="station/storage"]
 
@@ -729,52 +1570,673 @@ rotation = -3.14159
 z_index = 3
 occluder = SubResource( 25 )
 
-[node name="auto_door_wide_v" parent="station/storage" instance=ExtResource( 34 )]
-position = Vector2( -116, -8 )
+[node name="sprites" type="Node2D" parent="station/storage"]
 
-[node name="auto_door_wide_v2" parent="station/storage" instance=ExtResource( 34 )]
-position = Vector2( 116, -8 )
-
-[node name="top" type="Sprite" parent="station/storage"]
+[node name="top" type="Sprite" parent="station/storage/sprites"]
 z_index = 2
 texture = ExtResource( 33 )
 
-[node name="floor" type="Sprite" parent="station/storage"]
-z_index = -1
-texture = ExtResource( 32 )
-
-[node name="walls" type="Sprite" parent="station/storage"]
+[node name="walls" type="Sprite" parent="station/storage/sprites"]
 z_index = -1
 texture = ExtResource( 31 )
 
-[node name="steam" type="Particles2D" parent="station/storage"]
-visible = false
-position = Vector2( 56, -35 )
-rotation = 3.14159
-amount = 20
-lifetime = 20.0
-preprocess = 40.0
-process_material = SubResource( 16 )
-texture = ExtResource( 11 )
+[node name="floor" type="Sprite" parent="station/storage/sprites"]
+z_index = -1
+texture = ExtResource( 32 )
 
-[node name="steam2" type="Particles2D" parent="station/storage"]
-visible = false
-position = Vector2( -56, -34 )
-rotation = -2.87979
-amount = 20
-lifetime = 20.0
-preprocess = 40.0
-process_material = SubResource( 16 )
-texture = ExtResource( 11 )
+[node name="interactables" type="Node2D" parent="station/storage"]
+
+[node name="auto_door_wide_v" parent="station/storage/interactables" instance=ExtResource( 34 )]
+position = Vector2( -116, -8 )
+
+[node name="auto_door_wide_v2" parent="station/storage/interactables" instance=ExtResource( 34 )]
+position = Vector2( 116, -8 )
+
+[node name="effects" type="Node2D" parent="station/storage"]
+
+[node name="line_light_red" type="Light2D" parent="station/storage/effects"]
+position = Vector2( -82, -13 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red2" type="Light2D" parent="station/storage/effects"]
+position = Vector2( 0, -13 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red7" type="Light2D" parent="station/storage/effects"]
+scale = Vector2( 0.712788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 4.33
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.49
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red6" type="Light2D" parent="station/storage/effects"]
+position = Vector2( 83, 16 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red5" type="Light2D" parent="station/storage/effects"]
+position = Vector2( 0, 16 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red4" type="Light2D" parent="station/storage/effects"]
+position = Vector2( -82, 16 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+
+[node name="line_light_red3" type="Light2D" parent="station/storage/effects"]
+position = Vector2( 83, -13 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 0.5
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.82
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
 
 [node name="blocker" type="Polygon2D" parent="station/storage"]
+visible = false
 position = Vector2( 0, -49 )
 z_index = -2
 color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 polygon = PoolVector2Array( -120, -47, 120, -47, 120, -102, -120, -102 )
 
-[node name="blocker2" type="Polygon2D" parent="station/storage"]
-position = Vector2( 0, 198 )
+[node name="dock" type="Node2D" parent="station"]
+position = Vector2( 815, -97 )
+script = ExtResource( 38 )
+
+[node name="area" type="StaticBody2D" parent="station/dock"]
+
+[node name="col_top" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -205.5, -38.5 )
+z_index = 3
+shape = SubResource( 53 )
+
+[node name="col_top2" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -205.5, 13.5 )
+z_index = 3
+shape = SubResource( 53 )
+
+[node name="col_side" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -157, -66 )
+z_index = 3
+shape = SubResource( 54 )
+
+[node name="col_top_wall" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -133.5, -84.5 )
+z_index = 3
+shape = SubResource( 56 )
+
+[node name="col_top_wall3" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -151.5, 18 )
+z_index = 3
+shape = SubResource( 57 )
+
+[node name="col_top_wall4" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -150.5, 63.5 )
+z_index = 3
+shape = SubResource( 58 )
+
+[node name="col_top_wall2" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -130.5, -36 )
+z_index = 3
+shape = SubResource( 55 )
+
+[node name="col_side2" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -127, -63.5 )
+z_index = 3
+shape = SubResource( 59 )
+
+[node name="col_side3" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -157, 43 )
+z_index = 3
+shape = SubResource( 60 )
+
+[node name="col_side4" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -127, 37.5 )
+z_index = 3
+shape = SubResource( 61 )
+
+[node name="light_occ" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( -136, 4 )
+z_index = 3
+occluder = SubResource( 62 )
+
+[node name="light_occ2" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( -136, -16 )
+rotation = -3.14159
+z_index = 3
+occluder = SubResource( 63 )
+
+[node name="col_top3" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -79.9999, -38.5 )
+z_index = 3
+shape = SubResource( 64 )
+
+[node name="col_top4" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -79.9999, 13.5 )
+z_index = 3
+shape = SubResource( 65 )
+
+[node name="col_side5" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -36.9998, -66 )
+z_index = 3
+shape = SubResource( 54 )
+
+[node name="col_top_wall5" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -13.4998, -84.5 )
+z_index = 3
+shape = SubResource( 56 )
+
+[node name="col_top_wall6" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -31.4998, 18 )
+z_index = 3
+shape = SubResource( 57 )
+
+[node name="col_top_wall7" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -30.4998, 63.5 )
+z_index = 3
+shape = SubResource( 58 )
+
+[node name="col_top_wall8" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -10.4998, -36 )
+z_index = 3
+shape = SubResource( 55 )
+
+[node name="col_side6" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -6.99985, -63.5 )
+z_index = 3
+shape = SubResource( 59 )
+
+[node name="col_side7" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -36.9998, 43 )
+z_index = 3
+shape = SubResource( 60 )
+
+[node name="col_side8" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( -6.99985, 37.5 )
+z_index = 3
+shape = SubResource( 61 )
+
+[node name="light_occ3" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( -15.9998, 4 )
+z_index = 3
+occluder = SubResource( 66 )
+
+[node name="light_occ4" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( -15.9998, -16 )
+rotation = -3.14159
+z_index = 3
+occluder = SubResource( 67 )
+
+[node name="col_top5" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 40.0002, -38.5 )
+z_index = 3
+shape = SubResource( 64 )
+
+[node name="col_top6" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 40.0002, 13.5 )
+z_index = 3
+shape = SubResource( 65 )
+
+[node name="col_side9" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 83.0003, -66 )
+z_index = 3
+shape = SubResource( 54 )
+
+[node name="col_top_wall9" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 106.5, -84.5 )
+z_index = 3
+shape = SubResource( 56 )
+
+[node name="col_top_wall10" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 88.5003, 18 )
+z_index = 3
+shape = SubResource( 57 )
+
+[node name="col_top_wall11" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 89.5003, 63.5 )
+z_index = 3
+shape = SubResource( 58 )
+
+[node name="col_top_wall12" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 109.5, -36 )
+z_index = 3
+shape = SubResource( 55 )
+
+[node name="col_side10" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 113, -63.5 )
+z_index = 3
+shape = SubResource( 59 )
+
+[node name="col_side11" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 83.0003, 43 )
+z_index = 3
+shape = SubResource( 60 )
+
+[node name="col_side12" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 113, 37.5 )
+z_index = 3
+shape = SubResource( 61 )
+
+[node name="light_occ5" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( 104, 4 )
+z_index = 3
+occluder = SubResource( 66 )
+
+[node name="light_occ6" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( 104, -16 )
+rotation = -3.14159
+z_index = 3
+occluder = SubResource( 67 )
+
+[node name="col_top7" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 160, -38.5 )
+z_index = 3
+shape = SubResource( 64 )
+
+[node name="col_top8" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 160, 13.5 )
+z_index = 3
+shape = SubResource( 65 )
+
+[node name="col_side13" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 203, -66 )
+z_index = 3
+shape = SubResource( 54 )
+
+[node name="col_top_wall13" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 226.5, -84.5 )
+z_index = 3
+shape = SubResource( 56 )
+
+[node name="col_top_wall14" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 208.5, 18 )
+z_index = 3
+shape = SubResource( 57 )
+
+[node name="col_top_wall15" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 209.5, 63.5 )
+z_index = 3
+shape = SubResource( 58 )
+
+[node name="col_top_wall16" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 229.5, -36 )
+z_index = 3
+shape = SubResource( 55 )
+
+[node name="col_side14" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 233, -63.5 )
+z_index = 3
+shape = SubResource( 59 )
+
+[node name="col_side15" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 203, 43 )
+z_index = 3
+shape = SubResource( 60 )
+
+[node name="col_side16" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 233, 37.5 )
+z_index = 3
+shape = SubResource( 61 )
+
+[node name="light_occ7" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( 224, 4 )
+z_index = 3
+occluder = SubResource( 66 )
+
+[node name="light_occ8" type="LightOccluder2D" parent="station/dock/area"]
+position = Vector2( 224, -16 )
+rotation = -3.14159
+z_index = 3
+occluder = SubResource( 67 )
+
+[node name="col_top_wall17" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 243, -40 )
+z_index = 3
+shape = SubResource( 68 )
+
+[node name="col_top_wall18" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 243, 12 )
+z_index = 3
+shape = SubResource( 69 )
+
+[node name="col_top_wall19" type="CollisionShape2D" parent="station/dock/area"]
+position = Vector2( 247, -18 )
+z_index = 3
+shape = SubResource( 70 )
+
+[node name="sprites" type="Node2D" parent="station/dock"]
+
+[node name="top" type="Sprite" parent="station/dock/sprites"]
+z_index = 2
+texture = ExtResource( 45 )
+
+[node name="floor" type="Sprite" parent="station/dock/sprites"]
+z_index = -1
+texture = ExtResource( 44 )
+
+[node name="walls" type="Sprite" parent="station/dock/sprites"]
+z_index = -1
+texture = ExtResource( 43 )
+
+[node name="interactables" type="Node2D" parent="station/dock"]
+
+[node name="button_door" parent="station/dock/interactables" instance=ExtResource( 46 )]
+position = Vector2( -146, -76 )
+
+[node name="effects" type="Node2D" parent="station/dock"]
+
+[node name="line_light_red" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -132.5, -65.5 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red2" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -12.5, -65.5 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red3" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 107.5, -65.5 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red4" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 227.5, -65.5 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red5" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -151.323, 59.6769 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red6" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -31.3231, 59.6769 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red7" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 88.6769, 59.6769 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_red8" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 208.677, 59.6769 )
+scale = Vector2( 0.192788, 0.192788 )
+texture = ExtResource( 27 )
+texture_scale = 1.95
+color = Color( 0.796078, 0, 0, 1 )
+energy = 1.98
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -232, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue2" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -202, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue3" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -172, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue4" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -112, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue5" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -82, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue6" type="Light2D" parent="station/dock/effects"]
+position = Vector2( -52, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue7" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 8, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue8" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 38, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue9" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 68, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue10" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 128, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue11" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 158, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="line_light_blue12" type="Light2D" parent="station/dock/effects"]
+position = Vector2( 188, -6.5 )
+scale = Vector2( 1.06005, 1.06005 )
+texture = ExtResource( 27 )
+texture_scale = 0.4
+color = Color( 0.658824, 0.992157, 1, 1 )
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blocker" type="Polygon2D" parent="station/dock"]
+visible = false
+position = Vector2( 0, -49 )
 z_index = -2
 color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
 polygon = PoolVector2Array( -120, -47, 120, -47, 120, -102, -120, -102 )
